@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7eptdfi8dxkx"]
+[gd_scene load_steps=4 format=3 uid="uid://c7eptdfi8dxkx"]
 
 [ext_resource type="PackedScene" uid="uid://chjq0e1hhhrvl" path="res://Scenes/Player.tscn" id="1_v5ayn"]
 [ext_resource type="PackedScene" uid="uid://b36rx88qnaksp" path="res://Scenes/terrain_generation.tscn" id="3_o08t8"]
@@ -11,34 +11,15 @@ ambient_light_energy = 0.1
 tonemap_mode = 2
 glow_enabled = true
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.3
+volumetric_fog_density = 0.1
 volumetric_fog_ambient_inject = 0.1
-
-[sub_resource type="GDScript" id="GDScript_0ml4o"]
-resource_name = "TerrainHolder"
-script/source = "extends Node3D
-
-@export var player : CharacterBody3D
-
-func _process(delta):
-	position = Vector3(roundf(player.position.x), 0,roundf(player.position.z))
-"
 
 [node name="Main" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ym72d")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
-use_collision = true
-size = Vector3(10, 1, 10)
-
 [node name="Player" parent="." instance=ExtResource("1_v5ayn")]
 
-[node name="TerrainHolder" type="Node3D" parent="." node_paths=PackedStringArray("player")]
-script = SubResource("GDScript_0ml4o")
-player = NodePath("../Player")
-
-[node name="TerrainGeneration" parent="TerrainHolder" instance=ExtResource("3_o08t8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+[node name="Terrain" parent="." instance=ExtResource("3_o08t8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
