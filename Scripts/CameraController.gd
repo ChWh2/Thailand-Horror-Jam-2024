@@ -26,4 +26,4 @@ func _unhandled_input(event):
 		
 		neck.rotation.x = clamp(neck.rotation.x, deg_to_rad(-90), deg_to_rad(30))
 		
-		player.rotate_y(event.relative.x * 0.01)
+		player.rotate_y(-event.relative.x * 0.01)
