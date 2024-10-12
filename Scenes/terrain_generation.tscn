@@ -1,15 +1,24 @@
-[gd_scene load_steps=6 format=4 uid="uid://b36rx88qnaksp"]
+[gd_scene load_steps=9 format=4 uid="uid://b36rx88qnaksp"]
 
 [ext_resource type="Script" path="res://Scripts/TerrainGeneration.gd" id="1_xflu6"]
-[ext_resource type="Texture2D" uid="uid://c7a3vkw68selc" path="res://Assets/Ground_Forest_normal.jpg" id="2_8hfo7"]
+[ext_resource type="Texture2D" uid="uid://ci7kfchu1t5kn" path="res://Assets/Ground/Ground_Forest_002_baseColor.jpg" id="2_6l2ds"]
+[ext_resource type="Texture2D" uid="uid://ck04ae1io5obu" path="res://Assets/Ground/Ground_Forest_002_ambientOcclusion.jpg" id="3_3tmq4"]
+[ext_resource type="Texture2D" uid="uid://bn3qpo11htkx5" path="res://Assets/Ground/Ground_Forest_002_normal.jpg" id="4_nappk"]
+[ext_resource type="Texture2D" uid="uid://bo73hnwnk3226" path="res://Assets/Ground/Ground_Forest_002_roughness.jpg" id="5_nduhg"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_1dbyk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_adm3y"]
+albedo_texture = ExtResource("2_6l2ds")
+roughness_texture = ExtResource("5_nduhg")
+roughness_texture_channel = 4
 normal_enabled = true
-normal_texture = ExtResource("2_8hfo7")
+normal_texture = ExtResource("4_nappk")
+ao_enabled = true
+ao_texture = ExtResource("3_3tmq4")
+uv1_scale = Vector3(5, 5, 5)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_v5inj"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_bk1oc"]
 _surfaces = [{
 "aabb": AABB(-10, -2.49485, -10, 20, 4.44147, 20),
 "attribute_data": PackedByteArray("AAAAAAAAAADNzEw9AAAAAAAAAADNzEw9zcxMPc3MTD3NzMw9AAAAAM3MzD3NzEw9mpkZPgAAAACamRk+zcxMPc3MTD4AAAAAzcxMPs3MTD0AAIA+AAAAAAAAgD7NzEw9mpmZPgAAAACamZk+zcxMPTMzsz4AAAAAMzOzPs3MTD3NzMw+AAAAAM3MzD7NzEw9ZmbmPgAAAABmZuY+zcxMPQAAAD8AAAAAAAAAP83MTD3NzAw/AAAAAM3MDD/NzEw9mpkZPwAAAACamRk/zcxMPWZmJj8AAAAAZmYmP83MTD0zMzM/AAAAADMzMz/NzEw9AABAPwAAAAAAAEA/zcxMPc3MTD8AAAAAzcxMP83MTD2amVk/AAAAAJqZWT/NzEw9ZmZmPwAAAABmZmY/zcxMPTMzcz8AAAAAMzNzP83MTD0AAIA/AAAAAAAAgD/NzEw9AAAAAM3MzD3NzEw9zczMPc3MzD3NzMw9mpkZPs3MzD3NzEw+zczMPQAAgD7NzMw9mpmZPs3MzD0zM7M+zczMPc3MzD7NzMw9ZmbmPs3MzD0AAAA/zczMPc3MDD/NzMw9mpkZP83MzD1mZiY/zczMPTMzMz/NzMw9AABAP83MzD3NzEw/zczMPZqZWT/NzMw9ZmZmP83MzD0zM3M/zczMPQAAgD/NzMw9AAAAAJqZGT7NzEw9mpkZPs3MzD2amRk+mpkZPpqZGT7NzEw+mpkZPgAAgD6amRk+mpmZPpqZGT4zM7M+mpkZPs3MzD6amRk+ZmbmPpqZGT4AAAA/mpkZPs3MDD+amRk+mpkZP5qZGT5mZiY/mpkZPjMzMz+amRk+AABAP5qZGT7NzEw/mpkZPpqZWT+amRk+ZmZmP5qZGT4zM3M/mpkZPgAAgD+amRk+AAAAAM3MTD7NzEw9zcxMPs3MzD3NzEw+mpkZPs3MTD7NzEw+zcxMPgAAgD7NzEw+mpmZPs3MTD4zM7M+zcxMPs3MzD7NzEw+ZmbmPs3MTD4AAAA/zcxMPs3MDD/NzEw+mpkZP83MTD5mZiY/zcxMPjMzMz/NzEw+AABAP83MTD7NzEw/zcxMPpqZWT/NzEw+ZmZmP83MTD4zM3M/zcxMPgAAgD/NzEw+AAAAAAAAgD7NzEw9AACAPs3MzD0AAIA+mpkZPgAAgD7NzEw+AACAPgAAgD4AAIA+mpmZPgAAgD4zM7M+AACAPs3MzD4AAIA+ZmbmPgAAgD4AAAA/AACAPs3MDD8AAIA+mpkZPwAAgD5mZiY/AACAPjMzMz8AAIA+AABAPwAAgD7NzEw/AACAPpqZWT8AAIA+ZmZmPwAAgD4zM3M/AACAPgAAgD8AAIA+AAAAAJqZmT7NzEw9mpmZPs3MzD2amZk+mpkZPpqZmT7NzEw+mpmZPgAAgD6amZk+mpmZPpqZmT4zM7M+mpmZPs3MzD6amZk+ZmbmPpqZmT4AAAA/mpmZPs3MDD+amZk+mpkZP5qZmT5mZiY/mpmZPjMzMz+amZk+AABAP5qZmT7NzEw/mpmZPpqZWT+amZk+ZmZmP5qZmT4zM3M/mpmZPgAAgD+amZk+AAAAADMzsz7NzEw9MzOzPs3MzD0zM7M+mpkZPjMzsz7NzEw+MzOzPgAAgD4zM7M+mpmZPjMzsz4zM7M+MzOzPs3MzD4zM7M+ZmbmPjMzsz4AAAA/MzOzPs3MDD8zM7M+mpkZPzMzsz5mZiY/MzOzPjMzMz8zM7M+AABAPzMzsz7NzEw/MzOzPpqZWT8zM7M+ZmZmPzMzsz4zM3M/MzOzPgAAgD8zM7M+AAAAAM3MzD7NzEw9zczMPs3MzD3NzMw+mpkZPs3MzD7NzEw+zczMPgAAgD7NzMw+mpmZPs3MzD4zM7M+zczMPs3MzD7NzMw+ZmbmPs3MzD4AAAA/zczMPs3MDD/NzMw+mpkZP83MzD5mZiY/zczMPjMzMz/NzMw+AABAP83MzD7NzEw/zczMPpqZWT/NzMw+ZmZmP83MzD4zM3M/zczMPgAAgD/NzMw+AAAAAGZm5j7NzEw9ZmbmPs3MzD1mZuY+mpkZPmZm5j7NzEw+ZmbmPgAAgD5mZuY+mpmZPmZm5j4zM7M+ZmbmPs3MzD5mZuY+ZmbmPmZm5j4AAAA/ZmbmPs3MDD9mZuY+mpkZP2Zm5j5mZiY/ZmbmPjMzMz9mZuY+AABAP2Zm5j7NzEw/ZmbmPpqZWT9mZuY+ZmZmP2Zm5j4zM3M/ZmbmPgAAgD9mZuY+AAAAAAAAAD/NzEw9AAAAP83MzD0AAAA/mpkZPgAAAD/NzEw+AAAAPwAAgD4AAAA/mpmZPgAAAD8zM7M+AAAAP83MzD4AAAA/ZmbmPgAAAD8AAAA/AAAAP83MDD8AAAA/mpkZPwAAAD9mZiY/AAAAPzMzMz8AAAA/AABAPwAAAD/NzEw/AAAAP5qZWT8AAAA/ZmZmPwAAAD8zM3M/AAAAPwAAgD8AAAA/AAAAAM3MDD/NzEw9zcwMP83MzD3NzAw/mpkZPs3MDD/NzEw+zcwMPwAAgD7NzAw/mpmZPs3MDD8zM7M+zcwMP83MzD7NzAw/ZmbmPs3MDD8AAAA/zcwMP83MDD/NzAw/mpkZP83MDD9mZiY/zcwMPzMzMz/NzAw/AABAP83MDD/NzEw/zcwMP5qZWT/NzAw/ZmZmP83MDD8zM3M/zcwMPwAAgD/NzAw/AAAAAJqZGT/NzEw9mpkZP83MzD2amRk/mpkZPpqZGT/NzEw+mpkZPwAAgD6amRk/mpmZPpqZGT8zM7M+mpkZP83MzD6amRk/ZmbmPpqZGT8AAAA/mpkZP83MDD+amRk/mpkZP5qZGT9mZiY/mpkZPzMzMz+amRk/AABAP5qZGT/NzEw/mpkZP5qZWT+amRk/ZmZmP5qZGT8zM3M/mpkZPwAAgD+amRk/AAAAAGZmJj/NzEw9ZmYmP83MzD1mZiY/mpkZPmZmJj/NzEw+ZmYmPwAAgD5mZiY/mpmZPmZmJj8zM7M+ZmYmP83MzD5mZiY/ZmbmPmZmJj8AAAA/ZmYmP83MDD9mZiY/mpkZP2ZmJj9mZiY/ZmYmPzMzMz9mZiY/AABAP2ZmJj/NzEw/ZmYmP5qZWT9mZiY/ZmZmP2ZmJj8zM3M/ZmYmPwAAgD9mZiY/AAAAADMzMz/NzEw9MzMzP83MzD0zMzM/mpkZPjMzMz/NzEw+MzMzPwAAgD4zMzM/mpmZPjMzMz8zM7M+MzMzP83MzD4zMzM/ZmbmPjMzMz8AAAA/MzMzP83MDD8zMzM/mpkZPzMzMz9mZiY/MzMzPzMzMz8zMzM/AABAPzMzMz/NzEw/MzMzP5qZWT8zMzM/ZmZmPzMzMz8zM3M/MzMzPwAAgD8zMzM/AAAAAAAAQD/NzEw9AABAP83MzD0AAEA/mpkZPgAAQD/NzEw+AABAPwAAgD4AAEA/mpmZPgAAQD8zM7M+AABAP83MzD4AAEA/ZmbmPgAAQD8AAAA/AABAP83MDD8AAEA/mpkZPwAAQD9mZiY/AABAPzMzMz8AAEA/AABAPwAAQD/NzEw/AABAP5qZWT8AAEA/ZmZmPwAAQD8zM3M/AABAPwAAgD8AAEA/AAAAAM3MTD/NzEw9zcxMP83MzD3NzEw/mpkZPs3MTD/NzEw+zcxMPwAAgD7NzEw/mpmZPs3MTD8zM7M+zcxMP83MzD7NzEw/ZmbmPs3MTD8AAAA/zcxMP83MDD/NzEw/mpkZP83MTD9mZiY/zcxMPzMzMz/NzEw/AABAP83MTD/NzEw/zcxMP5qZWT/NzEw/ZmZmP83MTD8zM3M/zcxMPwAAgD/NzEw/AAAAAJqZWT/NzEw9mplZP83MzD2amVk/mpkZPpqZWT/NzEw+mplZPwAAgD6amVk/mpmZPpqZWT8zM7M+mplZP83MzD6amVk/ZmbmPpqZWT8AAAA/mplZP83MDD+amVk/mpkZP5qZWT9mZiY/mplZPzMzMz+amVk/AABAP5qZWT/NzEw/mplZP5qZWT+amVk/ZmZmP5qZWT8zM3M/mplZPwAAgD+amVk/AAAAAGZmZj/NzEw9ZmZmP83MzD1mZmY/mpkZPmZmZj/NzEw+ZmZmPwAAgD5mZmY/mpmZPmZmZj8zM7M+ZmZmP83MzD5mZmY/ZmbmPmZmZj8AAAA/ZmZmP83MDD9mZmY/mpkZP2ZmZj9mZiY/ZmZmPzMzMz9mZmY/AABAP2ZmZj/NzEw/ZmZmP5qZWT9mZmY/ZmZmP2ZmZj8zM3M/ZmZmPwAAgD9mZmY/AAAAADMzcz/NzEw9MzNzP83MzD0zM3M/mpkZPjMzcz/NzEw+MzNzPwAAgD4zM3M/mpmZPjMzcz8zM7M+MzNzP83MzD4zM3M/ZmbmPjMzcz8AAAA/MzNzP83MDD8zM3M/mpkZPzMzcz9mZiY/MzNzPzMzMz8zM3M/AABAPzMzcz/NzEw/MzNzP5qZWT8zM3M/ZmZmPzMzcz8zM3M/MzNzPwAAgD8zM3M/AAAAAAAAgD/NzEw9AACAP83MzD0AAIA/mpkZPgAAgD/NzEw+AACAPwAAgD4AAIA/mpmZPgAAgD8zM7M+AACAP83MzD4AAIA/ZmbmPgAAgD8AAAA/AACAP83MDD8AAIA/mpkZPwAAgD9mZiY/AACAPzMzMz8AAIA/AABAPwAAgD/NzEw/AACAP5qZWT8AAIA/ZmZmPwAAgD8zM3M/AACAPwAAgD8AAIA/"),
@@ -35,4 +44,4 @@ shape = SubResource("ConcavePolygonShape3D_1dbyk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_adm3y")
-mesh = SubResource("ArrayMesh_v5inj")
+mesh = SubResource("ArrayMesh_bk1oc")

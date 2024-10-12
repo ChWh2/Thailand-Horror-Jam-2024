@@ -10,6 +10,7 @@ extends StaticBody3D
 @export var zSize : int = 1.0
 
 @onready var lastpos : Vector3 = global_position
+@onready var material = meshInstance.material_override
 
 func _ready():
 	updateMesh()
@@ -21,8 +22,8 @@ func _process(delta):
 		lastpos = global_position
 		updateMesh()
 		
-		var uvOffset = Vector3(global_position.x/xSize, global_position.z/zSize, 0)
-		meshInstance.material_override.uv1_offset = uvOffset
+		var uvOffset = Vector3(global_position.x/xSize * material.uv1_scale.x, global_position.z/zSize * material.uv1_scale.y, 0)
+		material.uv1_offset = uvOffset
 
 func updateMesh():
 	var arrayMesh : ArrayMesh
