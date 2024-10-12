@@ -20,6 +20,7 @@ shape = SubResource("CapsuleShape3D_v7vi2")
 
 [node name="Camera3D" type="Camera3D" parent="Neck" node_paths=PackedStringArray("player", "neck", "lookRay")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+far = 100.0
 script = ExtResource("2_k4q0f")
 player = NodePath("../..")
 neck = NodePath("..")
