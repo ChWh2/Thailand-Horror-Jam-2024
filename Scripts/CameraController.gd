@@ -9,7 +9,7 @@ extends Camera3D
 func _ready():
 	lookRay.target_position = Vector3.BACK * lookRayDistance
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if lookRay.get_collider():
 		position.z = lookRay.get_collision_point().length() - 1.0
 	else:

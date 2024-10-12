@@ -1,19 +1,19 @@
 @tool
-extends StaticBody3D
+extends MeshInstance3D
 
 @export var update = false
 
-@export var meshInstance : MeshInstance3D
-
 @export var size : int = 1.0
-
-@export var resolution : int = 1
+@export var resolution : int = 1.0
+@export var centerOffset = 0.0
+@export var noiseOffset = 0.0
+@export var maxTerrainHeight = 1.0
 
 @onready var noise = FastNoiseLite.new()
 
 func _ready():
 	noise.noise_type=FastNoiseLite.TYPE_PERLIN
-	noise.frequency = 0.5
+	noise.frequency = 0.025
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -28,27 +28,32 @@ func updateMesh():
 	
 	surfTool.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
-	for z in range(size*resolution+1):
-		for x in range(size*resolution+1):
-			var y = noise.get_noise_2d(float(x)/float(resolution),float(z)/float(resolution)) * 2.0
+	for z in range(resolution+1):
+		for x in range(resolution+1):
+			
+			var percent = Vector2(x,z)/resolution
+			var pointOnMesh = Vector3((percent.x-centerOffset), 0, (percent.y-centerOffset))
+			var vertex = pointOnMesh * size
+			
+			vertex.y = noise.get_noise_2d(vertex.x+noiseOffset,vertex.z+noiseOffset) * maxTerrainHeight
 			
 			var uv = Vector2.ZERO
-			uv.x = inverse_lerp(0, size*resolution, x)
-			uv.y = inverse_lerp(0, size*resolution, z)
-			surfTool.set_uv(uv)
+			uv.x = percent.x
+			uv.y = percent.y
 			
-			surfTool.add_vertex(Vector3(float(x)/float(resolution) - float(size)/2.0, y, float(z)/float(resolution)-float(size)/2.0))
+			surfTool.set_uv(uv)
+			surfTool.add_vertex(vertex)
 	
 	var vert = 0
-	for z in size*resolution:
-		for x in size*resolution:
+	for z in resolution:
+		for x in resolution:
 			surfTool.add_index(vert)
 			surfTool.add_index(vert+1)
-			surfTool.add_index(vert+1+size*resolution)
+			surfTool.add_index(vert+1+resolution)
 			
-			surfTool.add_index(vert+1+size*resolution)
+			surfTool.add_index(vert+1+resolution)
 			surfTool.add_index(vert+1)
-			surfTool.add_index(vert+2+size*resolution)
+			surfTool.add_index(vert+2+resolution)
 			vert += 1
 		vert += 1
 
@@ -56,4 +61,4 @@ func updateMesh():
 	surfTool.generate_tangents()
 	arrayMesh = surfTool.commit()
 	
-	meshInstance.mesh = arrayMesh
+	mesh = arrayMesh

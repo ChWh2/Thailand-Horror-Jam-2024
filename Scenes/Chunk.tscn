@@ -1,0 +1,25 @@
+[gd_scene load_steps=8 format=3 uid="uid://dt3c3ncrjbbmq"]
+
+[ext_resource type="Texture2D" uid="uid://ci7kfchu1t5kn" path="res://Assets/Ground/Ground_Forest_002_baseColor.jpg" id="1_byav7"]
+[ext_resource type="Script" path="res://Scripts/Chunk.gd" id="1_es12t"]
+[ext_resource type="Texture2D" uid="uid://ck04ae1io5obu" path="res://Assets/Ground/Ground_Forest_002_ambientOcclusion.jpg" id="2_te205"]
+[ext_resource type="Texture2D" uid="uid://bn3qpo11htkx5" path="res://Assets/Ground/Ground_Forest_002_normal.jpg" id="3_mbrfy"]
+[ext_resource type="Texture2D" uid="uid://bo73hnwnk3226" path="res://Assets/Ground/Ground_Forest_002_roughness.jpg" id="4_f0xyh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0oxkj"]
+albedo_texture = ExtResource("1_byav7")
+roughness_texture = ExtResource("4_f0xyh")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("3_mbrfy")
+ao_enabled = true
+ao_texture = ExtResource("2_te205")
+uv1_scale = Vector3(5, 5, 5)
+uv1_offset = Vector3(0, 0.25, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_twgoe"]
+
+[node name="Chunk" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_0oxkj")
+mesh = SubResource("PlaneMesh_twgoe")
+script = ExtResource("1_es12t")

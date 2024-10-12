@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7eptdfi8dxkx"]
+[gd_scene load_steps=6 format=3 uid="uid://c7eptdfi8dxkx"]
 
 [ext_resource type="PackedScene" uid="uid://chjq0e1hhhrvl" path="res://Scenes/Player.tscn" id="1_v5ayn"]
-[ext_resource type="PackedScene" uid="uid://b36rx88qnaksp" path="res://Scenes/terrain_generation.tscn" id="3_o08t8"]
+[ext_resource type="Script" path="res://Scenes/infiniteTerrain.gd" id="2_i5h1t"]
+[ext_resource type="PackedScene" uid="uid://dt3c3ncrjbbmq" path="res://Scenes/Chunk.tscn" id="3_34761"]
 
 [sub_resource type="Environment" id="Environment_ym72d"]
 background_mode = 1
@@ -14,12 +15,22 @@ volumetric_fog_enabled = true
 volumetric_fog_density = 0.1
 volumetric_fog_ambient_inject = 0.1
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4jnr2"]
+noise_type = 3
+frequency = 0.008
+
 [node name="Main" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ym72d")
 
 [node name="Player" parent="." instance=ExtResource("1_v5ayn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 
-[node name="Terrain" parent="." instance=ExtResource("3_o08t8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+[node name="terrainGenerator" type="Node3D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("2_i5h1t")
+chunkSize = 100
+viewDist = 300
+player = NodePath("../Player")
+chunkMeshScene = ExtResource("3_34761")
+noise = SubResource("FastNoiseLite_4jnr2")
