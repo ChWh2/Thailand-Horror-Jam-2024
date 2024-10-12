@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dt3c3ncrjbbmq"]
+[gd_scene load_steps=11 format=3 uid="uid://dt3c3ncrjbbmq"]
 
 [ext_resource type="Script" path="res://Scripts/Chunk.gd" id="1_es12t"]
 [ext_resource type="Texture2D" uid="uid://ci7kfchu1t5kn" path="res://Assets/Images/Ground_Forest_002/Ground_Forest_002_baseColor.jpg" id="1_nh8bt"]
@@ -27,11 +27,6 @@ frequency = 0.008
 noise_type = 2
 seed = 2
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_fb5ed"]
-seed = 6
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_lhy6o"]
-
 [node name="Chunk" type="MeshInstance3D"]
 material_override = SubResource("StandardMaterial3D_jrq4f")
 mesh = SubResource("PlaneMesh_twgoe")
@@ -41,5 +36,3 @@ tree = ExtResource("6_5mlks")
 treeDensity = 20
 maxTreeOffset = 100.0
 treeNoise = SubResource("FastNoiseLite_tbipg")
-treeXOffsetNoise = SubResource("FastNoiseLite_fb5ed")
-treeYOffsetNoise = SubResource("FastNoiseLite_lhy6o")

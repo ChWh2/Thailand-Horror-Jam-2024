@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c7eptdfi8dxkx"]
 
 [ext_resource type="PackedScene" uid="uid://chjq0e1hhhrvl" path="res://Scenes/Player.tscn" id="1_v5ayn"]
-[ext_resource type="Script" path="res://Scenes/infiniteTerrain.gd" id="2_i5h1t"]
+[ext_resource type="Script" path="res://Scripts/infiniteTerrain.gd" id="2_i5h1t"]
 [ext_resource type="PackedScene" uid="uid://dt3c3ncrjbbmq" path="res://Scenes/Chunk.tscn" id="3_34761"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wxo6e"]
