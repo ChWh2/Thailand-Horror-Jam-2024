@@ -2,6 +2,7 @@ extends Camera3D
 
 @export var player : CharacterBody3D
 @export var neck : Node3D
+@export var body : Node3D
 
 @export var lookRay : RayCast3D
 @export var lookRayDistance : float = 4.0
@@ -23,8 +24,9 @@ func _unhandled_input(event):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
 	if event is InputEventMouseMotion:
-		neck.rotate_x(event.relative.y * 0.01)
+		neck.rotate_x(-event.relative.y * 0.01)
 		
 		neck.rotation.x = clamp(neck.rotation.x, deg_to_rad(-90), deg_to_rad(30))
 		
 		player.rotate_y(-event.relative.x * 0.01)
+		body.rotate_y(event.relative.x * 0.01)

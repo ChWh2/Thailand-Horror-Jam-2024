@@ -4,8 +4,6 @@
 [ext_resource type="Script" path="res://Scripts/CameraController.gd" id="2_k4q0f"]
 [ext_resource type="Texture2D" uid="uid://d2wjiugwb0rqt" path="res://Assets/Models/Halloween_Pack_01_CT/CT_Pallete.png" id="3_lcgdq"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_h8dra"]
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v7vi2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brb5u"]
@@ -123,40 +121,47 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_0srgp")
 
-[node name="Player" type="CharacterBody3D"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_h8dra"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("body")]
 script = ExtResource("1_5it6q")
 speed = 10.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_h8dra")
+body = NodePath("Body")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_v7vi2")
 
 [node name="Neck" type="Node3D" parent="."]
 
-[node name="Camera3D" type="Camera3D" parent="Neck" node_paths=PackedStringArray("player", "neck", "lookRay")]
+[node name="Camera3D" type="Camera3D" parent="Neck" node_paths=PackedStringArray("player", "neck", "body", "lookRay")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 near = 0.001
 script = ExtResource("2_k4q0f")
 player = NodePath("../..")
 neck = NodePath("..")
+body = NodePath("../../Body")
 lookRay = NodePath("../RayCast3D")
 
 [node name="RayCast3D" type="RayCast3D" parent="Neck"]
 target_position = Vector3(0, 0, 0)
 
-[node name="Jack-o-Lantern_04" type="MeshInstance3D" parent="."]
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Jack-o-Lantern_04" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(7.76457, -28.9778, -1.26666e-06, 0, -1.31134e-06, 30, -28.9778, -7.76457, -3.394e-07, 0, 0.138746, 0)
 mesh = SubResource("ArrayMesh_dxouq")
 skeleton = NodePath("")
 
-[node name="Witch_Hat" type="MeshInstance3D" parent="Jack-o-Lantern_04"]
-transform = Transform3D(2.11085, -1.19209e-07, 0, 1.19209e-07, 2.11085, 1.59364e-07, 0, -1.59364e-07, 2.11085, 7.05144e-17, -9.9421e-10, 0.0227449)
+[node name="Witch_Hat" type="MeshInstance3D" parent="Body/Jack-o-Lantern_04"]
+transform = Transform3D(2.11085, -1.19209e-07, -1.42109e-14, 1.19209e-07, 2.11085, 1.59364e-07, 3.55271e-15, -1.59364e-07, 2.11085, 5.61677e-17, -9.69993e-10, 0.0221909)
 mesh = SubResource("ArrayMesh_n0nhy")
 skeleton = NodePath("")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Jack-o-Lantern_04"]
-transform = Transform3D(0.0333333, 0, -8.32667e-17, 0, 0.0333333, 3.81639e-16, 5.55112e-17, -5.27356e-16, 0.0333333, 0.019142, 0.00512907, 0.01)
-light_color = Color(1, 0.921569, 0.482353, 1)
+[node name="OmniLight3D" type="OmniLight3D" parent="Body/Jack-o-Lantern_04"]
+transform = Transform3D(1, 2.63467e-29, -1.66533e-15, 0, 1, 1.58207e-14, 1.66533e-15, -1.58207e-14, 1, 0.019142, 0.00512907, 0.01)
+light_color = Color(1, 0.764706, 0.0156863, 1)
 omni_range = 3.93112
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Body"]
+mesh = SubResource("CapsuleMesh_h8dra")
+skeleton = NodePath("../..")
