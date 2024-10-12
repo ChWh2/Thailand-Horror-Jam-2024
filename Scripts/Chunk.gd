@@ -5,7 +5,7 @@ extends MeshInstance3D
 @export var resolution : int = 1
 @export var maxTerrainHeight = 1.0
 
-var ChunkLODs = [5,20,50,80]
+var ChunkLODs = [5,10,25,40]
 var positionCoords = Vector2.ZERO
 const CENTER_OFFSET = 0.5
 
@@ -13,7 +13,7 @@ var setCollision = false
 
 func generateTerrain(noise:FastNoiseLite, coords:Vector2,size:int, initially_visible:bool) -> void:
 	terrainSize=size
-	positionCoords = coords
+	positionCoords = coords * size
 	
 	var arrayMesh : ArrayMesh
 	var surfTool = SurfaceTool.new()
@@ -27,7 +27,7 @@ func generateTerrain(noise:FastNoiseLite, coords:Vector2,size:int, initially_vis
 			var pointOnMesh = Vector3((percent.x-CENTER_OFFSET), 0, (percent.y-CENTER_OFFSET))
 			var vertex = pointOnMesh * terrainSize
 			
-			vertex.y = noise.get_noise_2d(vertex.x+position.x,vertex.z+position.z) * maxTerrainHeight
+			vertex.y = noise.get_noise_2d(vertex.x+positionCoords.x,vertex.z+positionCoords.y) * maxTerrainHeight
 			
 			var uv = Vector2.ZERO
 			uv.x = percent.x
@@ -72,11 +72,11 @@ func updateLOD(viewPos:Vector2) -> bool:
 	var viewerDist = positionCoords.distance_to(viewPos)
 	var updateTerrain = false
 	var newLOD = 0
-	if viewerDist > 200:
+	if viewerDist > 300:
 		newLOD = ChunkLODs[0]
-	elif viewerDist >= 150:
+	elif viewerDist >= 200:
 		newLOD = ChunkLODs[1]
-	elif viewerDist >= 125:
+	elif viewerDist >= 150:
 		newLOD = ChunkLODs[2]
 	else:
 		newLOD = ChunkLODs[3]

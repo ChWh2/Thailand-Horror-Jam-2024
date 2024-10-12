@@ -1,18 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7eptdfi8dxkx"]
+[gd_scene load_steps=8 format=3 uid="uid://c7eptdfi8dxkx"]
 
 [ext_resource type="PackedScene" uid="uid://chjq0e1hhhrvl" path="res://Scenes/Player.tscn" id="1_v5ayn"]
 [ext_resource type="Script" path="res://Scenes/infiniteTerrain.gd" id="2_i5h1t"]
 [ext_resource type="PackedScene" uid="uid://dt3c3ncrjbbmq" path="res://Scenes/Chunk.tscn" id="3_34761"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wxo6e"]
+
+[sub_resource type="Sky" id="Sky_03v0u"]
+sky_material = SubResource("ProceduralSkyMaterial_wxo6e")
+
 [sub_resource type="Environment" id="Environment_ym72d"]
-background_mode = 1
+background_mode = 2
+sky = SubResource("Sky_03v0u")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.1
 tonemap_mode = 2
 glow_enabled = true
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.1
 volumetric_fog_ambient_inject = 0.1
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4jnr2"]
@@ -20,6 +25,10 @@ noise_type = 3
 frequency = 0.008
 
 [node name="Main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ym72d")
