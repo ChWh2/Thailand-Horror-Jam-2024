@@ -12,8 +12,6 @@ var chunks = {}
 var chunksVisible = 0
 var lastVisibleChunks : Array[terrainChunk]
 
-@export var noise : FastNoiseLite
-
 func _ready():
 	chunksVisible= roundi(float(viewDist)/float(chunkSize))
 	#setWireframe()
@@ -41,7 +39,7 @@ func updateVisibleChunks():
 			if chunks.has(viewChunkCoord):
 				chunks[viewChunkCoord].updateChunk(playerPos, viewDist)
 				if(chunks[viewChunkCoord].updateLOD(playerPos)):
-					chunks[viewChunkCoord].generateTerrain(noise, viewChunkCoord,chunkSize, true)
+					chunks[viewChunkCoord].generateTerrain(viewChunkCoord,chunkSize, true)
 			else:
 				var newChunk : terrainChunk = chunkMeshScene.instantiate()
 				add_child(newChunk)
@@ -50,5 +48,5 @@ func updateVisibleChunks():
 				var worldPos = Vector3(pos.x, 0, pos.y)
 				
 				newChunk.global_position = worldPos
-				newChunk.generateTerrain(noise, viewChunkCoord, chunkSize, false)
+				newChunk.generateTerrain(viewChunkCoord, chunkSize, false)
 				chunks[viewChunkCoord] = newChunk

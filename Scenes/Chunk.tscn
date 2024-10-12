@@ -1,25 +1,45 @@
-[gd_scene load_steps=8 format=3 uid="uid://dt3c3ncrjbbmq"]
+[gd_scene load_steps=13 format=3 uid="uid://dt3c3ncrjbbmq"]
 
-[ext_resource type="Texture2D" uid="uid://ci7kfchu1t5kn" path="res://Assets/Ground/Ground_Forest_002_baseColor.jpg" id="1_byav7"]
 [ext_resource type="Script" path="res://Scripts/Chunk.gd" id="1_es12t"]
-[ext_resource type="Texture2D" uid="uid://ck04ae1io5obu" path="res://Assets/Ground/Ground_Forest_002_ambientOcclusion.jpg" id="2_te205"]
-[ext_resource type="Texture2D" uid="uid://bn3qpo11htkx5" path="res://Assets/Ground/Ground_Forest_002_normal.jpg" id="3_mbrfy"]
-[ext_resource type="Texture2D" uid="uid://bo73hnwnk3226" path="res://Assets/Ground/Ground_Forest_002_roughness.jpg" id="4_f0xyh"]
+[ext_resource type="Texture2D" uid="uid://ci7kfchu1t5kn" path="res://Assets/Images/Ground_Forest_002/Ground_Forest_002_baseColor.jpg" id="1_nh8bt"]
+[ext_resource type="Texture2D" uid="uid://ck04ae1io5obu" path="res://Assets/Images/Ground_Forest_002/Ground_Forest_002_ambientOcclusion.jpg" id="2_kmoqk"]
+[ext_resource type="Texture2D" uid="uid://bn3qpo11htkx5" path="res://Assets/Images/Ground_Forest_002/Ground_Forest_002_normal.jpg" id="3_6sva4"]
+[ext_resource type="Texture2D" uid="uid://bo73hnwnk3226" path="res://Assets/Images/Ground_Forest_002/Ground_Forest_002_roughness.jpg" id="4_qvm4e"]
+[ext_resource type="PackedScene" uid="uid://b0g04gf7iy088" path="res://Scenes/tree_01.tscn" id="6_5mlks"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0oxkj"]
-albedo_texture = ExtResource("1_byav7")
-roughness_texture = ExtResource("4_f0xyh")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jrq4f"]
+albedo_texture = ExtResource("1_nh8bt")
+roughness_texture = ExtResource("4_qvm4e")
 roughness_texture_channel = 4
 normal_enabled = true
-normal_texture = ExtResource("3_mbrfy")
+normal_texture = ExtResource("3_6sva4")
 ao_enabled = true
-ao_texture = ExtResource("2_te205")
+ao_texture = ExtResource("2_kmoqk")
 uv1_scale = Vector3(5, 5, 5)
-uv1_offset = Vector3(0, 0.25, 0)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_twgoe"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jbc0d"]
+noise_type = 3
+frequency = 0.008
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tbipg"]
+noise_type = 2
+seed = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fb5ed"]
+seed = 6
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lhy6o"]
+
 [node name="Chunk" type="MeshInstance3D"]
-material_override = SubResource("StandardMaterial3D_0oxkj")
+material_override = SubResource("StandardMaterial3D_jrq4f")
 mesh = SubResource("PlaneMesh_twgoe")
 script = ExtResource("1_es12t")
+terrainNoise = SubResource("FastNoiseLite_jbc0d")
+tree = ExtResource("6_5mlks")
+treeDensity = 20
+maxTreeOffset = 100.0
+treeNoise = SubResource("FastNoiseLite_tbipg")
+treeXOffsetNoise = SubResource("FastNoiseLite_fb5ed")
+treeYOffsetNoise = SubResource("FastNoiseLite_lhy6o")

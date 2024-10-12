@@ -4,6 +4,12 @@ extends MeshInstance3D
 @export var terrainSize : int = 1
 @export var resolution : int = 1
 @export var maxTerrainHeight = 1.0
+@export var terrainNoise : FastNoiseLite
+
+@export var tree : PackedScene
+@export var treeDensity : int = 1
+@export var maxTreeOffset : float = 1.0
+@export var treeNoise : FastNoiseLite
 
 var ChunkLODs = [5,10,25,40]
 var positionCoords = Vector2.ZERO
@@ -11,7 +17,7 @@ const CENTER_OFFSET = 0.5
 
 var setCollision = false
 
-func generateTerrain(noise:FastNoiseLite, coords:Vector2,size:int, initially_visible:bool) -> void:
+func generateTerrain(coords:Vector2,size:int, initially_visible:bool) -> void:
 	terrainSize=size
 	positionCoords = coords * size
 	
@@ -27,7 +33,7 @@ func generateTerrain(noise:FastNoiseLite, coords:Vector2,size:int, initially_vis
 			var pointOnMesh = Vector3((percent.x-CENTER_OFFSET), 0, (percent.y-CENTER_OFFSET))
 			var vertex = pointOnMesh * terrainSize
 			
-			vertex.y = noise.get_noise_2d(vertex.x+positionCoords.x,vertex.z+positionCoords.y) * maxTerrainHeight
+			vertex.y = terrainNoise.get_noise_2d(vertex.x+positionCoords.x,vertex.z+positionCoords.y) * maxTerrainHeight
 			
 			var uv = Vector2.ZERO
 			uv.x = percent.x
@@ -59,6 +65,8 @@ func generateTerrain(noise:FastNoiseLite, coords:Vector2,size:int, initially_vis
 		genCollision()
 	
 	setChunkVisible(initially_visible)
+	
+	generateTrees()
 
 func setChunkVisible(visibility : bool) -> void:
 	visible = visibility
@@ -92,3 +100,17 @@ func genCollision() -> void:
 		for i in get_children():
 			i.queue_free()
 	create_trimesh_collision()
+
+func generateTrees():
+	for z in range(treeDensity):
+		for x in range(treeDensity):
+			var percent = Vector2(x,z)/treeDensity
+			var pointOnMesh = Vector3((percent.x-CENTER_OFFSET), 0, (percent.y-CENTER_OFFSET))
+			var vertex = pointOnMesh * terrainSize
+			
+			if(treeNoise.get_noise_2d(vertex.x+positionCoords.x,vertex.z+positionCoords.y) > -0.5):
+				var newTree = tree.instantiate()
+				add_child(newTree)
+				newTree.position = vertex
+				
+				newTree.position.y = terrainNoise.get_noise_2d(vertex.x+positionCoords.x,vertex.z+positionCoords.y) * maxTerrainHeight - 1.0
