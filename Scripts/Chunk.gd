@@ -3,15 +3,16 @@ extends MeshInstance3D
 
 @export var terrainSize : int = 1
 @export var resolution : int = 1
-@export var maxTerrainHeight = 1.0
+@export var maxTerrainHeight : float = 1.0
 @export var terrainNoise : FastNoiseLite
 
 @export var treeDensity : int = 1
 @export var maxTreeOffset : float = 1.0
 @export var treeNoise : FastNoiseLite
 @export var treeScene : PackedScene
+@export var farTreeScene : PackedScene
 
-var ChunkLODs = [5,10,25,40]
+var ChunkLODs = [1,5,15,30]
 var positionCoords = Vector2.ZERO
 const CENTER_OFFSET = 0.5
 

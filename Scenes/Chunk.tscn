@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://dt3c3ncrjbbmq"]
+[gd_scene load_steps=9 format=3 uid="uid://dt3c3ncrjbbmq"]
 
 [ext_resource type="Script" path="res://Scripts/Chunk.gd" id="1_es12t"]
 [ext_resource type="Texture2D" uid="uid://y4q7yb81dwnt" path="res://Assets/Images/Grass_03-128x128.png" id="1_n4b6m"]
 [ext_resource type="PackedScene" uid="uid://b0g04gf7iy088" path="res://Scenes/tree_01.tscn" id="3_82kb0"]
+[ext_resource type="PackedScene" uid="uid://bdf3jws1qm2ak" path="res://Scenes/FarTree.tscn" id="4_rkgrq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rut4c"]
 albedo_texture = ExtResource("1_n4b6m")
-uv1_scale = Vector3(10, 10, 10)
+uv1_scale = Vector3(20, 20, 20)
+texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_twgoe"]
 

@@ -1,8 +1,8 @@
 extends Node3D
 
 @export var chunkSize = 200
-@export var terrainHeight = 20
-@export var viewDist = 1000
+@export var terrainHeight : float = 20.0
+@export var viewDist : float = 1000
 @export var player : CharacterBody3D
 
 @export var chunkMeshScene : PackedScene
