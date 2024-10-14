@@ -6,10 +6,10 @@ extends MeshInstance3D
 @export var maxTerrainHeight = 1.0
 @export var terrainNoise : FastNoiseLite
 
-@export var tree : PackedScene
 @export var treeDensity : int = 1
 @export var maxTreeOffset : float = 1.0
 @export var treeNoise : FastNoiseLite
+@export var treeScene : PackedScene
 
 var ChunkLODs = [5,10,25,40]
 var positionCoords = Vector2.ZERO
@@ -99,6 +99,7 @@ func genCollision() -> void:
 	if get_child_count() > 0:
 		for i in get_children():
 			i.queue_free()
+
 	create_trimesh_collision()
 
 func generateTrees():
@@ -109,8 +110,8 @@ func generateTrees():
 			var vertex = pointOnMesh * terrainSize
 			
 			if(treeNoise.get_noise_2d(vertex.x+positionCoords.x,vertex.z+positionCoords.y) > -0.5):
-				var newTree = tree.instantiate()
+				var newTree = treeScene.instantiate()
 				add_child(newTree)
 				newTree.position = vertex
-				
 				newTree.position.y = terrainNoise.get_noise_2d(vertex.x+positionCoords.x,vertex.z+positionCoords.y) * maxTerrainHeight - 1.0
+				newTree.pickTree()

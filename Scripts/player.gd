@@ -1,9 +1,6 @@
 extends CharacterBody3D
 
-
 @export var speed = 5.0
-
-@export var body : Node3D
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -17,8 +14,5 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
-	
-	if velocity.x or velocity.z:
-		body.look_at(body.global_position + Vector3(velocity.x, 0, velocity.z))
 	
 	move_and_slide()
