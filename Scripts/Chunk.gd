@@ -67,7 +67,9 @@ func generateTerrain(coords:Vector2,size:int, initially_visible:bool) -> void:
 	
 	setChunkVisible(initially_visible)
 	
-	generateTrees()
+	if resolution == ChunkLODs[3] or resolution == ChunkLODs[2]:
+		generateTrees()
+	
 
 func setChunkVisible(visibility : bool) -> void:
 	visible = visibility

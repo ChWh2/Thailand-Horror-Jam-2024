@@ -29,3 +29,4 @@ treeDensity = 20
 maxTreeOffset = 100.0
 treeNoise = SubResource("FastNoiseLite_tbipg")
 treeScene = ExtResource("3_82kb0")
+farTreeScene = ExtResource("4_rkgrq")
