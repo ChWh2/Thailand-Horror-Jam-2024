@@ -12,5 +12,5 @@ func _unhandled_input(event):
 	
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		neck.rotate_x(-event.relative.y * 0.01)
-		neck.rotation.x = clamp(neck.rotation.x, deg_to_rad(-90), deg_to_rad(30))
+		neck.rotation.x = clamp(neck.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 		player.rotate_y(-event.relative.x * 0.01)

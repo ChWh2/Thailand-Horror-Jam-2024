@@ -3,6 +3,9 @@ extends CharacterBody3D
 
 @export var speed = 5.0
 
+func attacked():
+	get_tree().quit()
+
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
