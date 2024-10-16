@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7eptdfi8dxkx"]
+[gd_scene load_steps=11 format=3 uid="uid://c7eptdfi8dxkx"]
 
 [ext_resource type="PackedScene" uid="uid://chjq0e1hhhrvl" path="res://Scenes/Player.tscn" id="1_v5ayn"]
 [ext_resource type="Script" path="res://Scripts/infiniteTerrain.gd" id="2_i5h1t"]
 [ext_resource type="PackedScene" uid="uid://dt3c3ncrjbbmq" path="res://Scenes/Chunk.tscn" id="3_34761"]
 [ext_resource type="PackedScene" uid="uid://3oa0eg0c5ri7" path="res://Scenes/wendigo.tscn" id="4_nne12"]
 [ext_resource type="PackedScene" uid="uid://dxb1j2lqywpex" path="res://Scenes/ammo.tscn" id="5_1r857"]
+[ext_resource type="Script" path="res://Scripts/ammo_crate_spawner.gd" id="6_dxefk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wxo6e"]
 
@@ -23,6 +24,10 @@ fog_enabled = true
 fog_density = 0.02
 volumetric_fog_density = 0.06
 volumetric_fog_ambient_inject = 0.1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mlplv"]
+noise_type = 3
+frequency = 0.008
 
 [node name="Main" type="Node3D"]
 
@@ -47,5 +52,10 @@ chunkMeshScene = ExtResource("3_34761")
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 100, 1, 0)
 target = NodePath("../Player")
 
-[node name="Ammo" parent="." instance=ExtResource("5_1r857")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+[node name="AmmoCrateSpawner" type="Node3D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("6_dxefk")
+ammoCrate = ExtResource("5_1r857")
+player = NodePath("../Player")
+maxCrates = 5
+maxDistance = 75.0
+terrainNoise = SubResource("FastNoiseLite_mlplv")

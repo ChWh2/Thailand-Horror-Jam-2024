@@ -10,7 +10,6 @@ albedo_texture = ExtResource("1_dciu0")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0u7so"]
 resource_name = "Ammo_Box"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 0.0
@@ -48,19 +47,19 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_sbyw8")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2mpch"]
-size = Vector3(1.25, 1, 1)
+size = Vector3(1.5, 1, 1.25)
 
-[node name="Ammo" type="Area3D"]
-collision_layer = 4
+[node name="Box" type="Area3D"]
 script = ExtResource("1_fe481")
 
 [node name="Ammo_Box_Open" type="MeshInstance3D" parent="."]
-transform = Transform3D(50, 0, 0, 0, -1.40178e-06, 32.069, 0, -32.069, -1.40178e-06, 0, 0, 0)
+transform = Transform3D(50, 0, 0, 0, -1.40178e-06, 32.069, 0, -32.069, -1.40178e-06, 0, 0.3, 0)
 material_override = SubResource("StandardMaterial3D_dbn54")
 mesh = SubResource("ArrayMesh_u83hs")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 shape = SubResource("BoxShape3D_2mpch")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

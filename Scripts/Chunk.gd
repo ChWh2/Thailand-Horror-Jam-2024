@@ -104,6 +104,7 @@ func genCollision() -> void:
 			i.queue_free()
 
 	create_trimesh_collision()
+	
 
 func generateTrees():
 	for z in range(treeDensity):
