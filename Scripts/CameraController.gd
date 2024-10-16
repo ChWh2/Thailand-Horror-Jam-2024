@@ -3,6 +3,8 @@ extends Camera3D
 @export var player : CharacterBody3D
 @export var neck : Node3D
 
+func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:

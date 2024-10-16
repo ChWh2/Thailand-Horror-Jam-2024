@@ -3,10 +3,29 @@ extends CharacterBody3D
 
 @export var speed = 5.0
 
+var ammo : int = 1
+
+var justShotGun : bool = false
+
 func attacked():
 	get_tree().quit()
 
+func shoot():
+	if(ammo > 0):
+		if $Neck/GunRay.get_collider() is wendigo:
+			$Neck/GunRay.get_collider().hurt()
+		
+		justShotGun = true
+		ammo -= 1
+		$UI/GunCamera/SubViewport/GunShotParticles.emitting = true
+		#playSound
+
 func _physics_process(delta):
+	$UI/Ammo.text = str("Ammo: ", ammo)
+	
+	if Input.is_action_just_pressed("Shoot"):
+		shoot()
+	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 

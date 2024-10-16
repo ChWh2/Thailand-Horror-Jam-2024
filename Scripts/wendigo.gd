@@ -1,3 +1,4 @@
+class_name wendigo
 extends CharacterBody3D
 
 
@@ -10,6 +11,9 @@ extends CharacterBody3D
 @export var loseInterestDist : float
 @export var reachDist : float
 @export var outOfRangeDist : float
+@export var runAwayDist : float
+
+@export var health = 10
 
 @export var target : Player
 
@@ -19,17 +23,18 @@ extends CharacterBody3D
 @onready var cam : Camera3D = get_viewport().get_camera_3d()
 @onready var mesh : Node3D = $Mesh
 
-enum STATES{STALKING, DECIDE_GET_OUT_OF_VIEW_DIRECTION, GETTING_OUT_OF_VIEW, ATTACKING, OUT_OF_RANGE}
+enum STATES{STALKING, DECIDE_GET_OUT_OF_VIEW_DIRECTION, GETTING_OUT_OF_VIEW, ATTACKING, OUT_OF_RANGE, RUN_AWAY}
 
 var state : STATES = STATES.STALKING
 var onScreen = false
 var exitScreenRight : bool = false
 
+func hurt() -> void:
+	health -= 1
+	state = STATES.RUN_AWAY
 
 func testToChangeState() -> STATES:
 	var distance = position.distance_to(target.position)
-
-	$Label.text = str("Sanity: ", clamp(distance, 0, 100), "/100").pad_decimals(0)
 	
 	if state == STATES.STALKING:
 		if(distance >= outOfRangeDist):
@@ -64,6 +69,11 @@ func testToChangeState() -> STATES:
 	elif state == STATES.OUT_OF_RANGE:
 		if(distance <= outOfRangeDist):
 			return STATES.STALKING
+	
+	elif state == STATES.RUN_AWAY:
+		if(distance >= runAwayDist):
+			return STATES.OUT_OF_RANGE
+	
 	return state
 
 func stateMachine():
@@ -79,8 +89,18 @@ func stateMachine():
 		attacking()
 	elif state == STATES.OUT_OF_RANGE:
 		outOfRange()
+	elif state == STATES.RUN_AWAY:
+		runAway()
+
+func _ready():
+	$UI/Health.max_value = health
+	$UI/Health.value = health
 
 func _physics_process(_delta):
+	
+	if target.justShotGun == true:
+		state = STATES.RUN_AWAY
+		target.justShotGun = false
 	
 	look_at(target.position)
 	rotation.x = 0.0
@@ -94,6 +114,8 @@ func _physics_process(_delta):
 	
 	if velocity.x != 0.0 or velocity.z != 0.0:
 		mesh.look_at(Vector3(velocity.x, 0.0, velocity.z) + mesh.global_position)
+	
+	$UI/Health.value = health
 	
 
 func stalking():
@@ -136,6 +158,12 @@ func attacking():
 
 func outOfRange():
 	var direction = (transform.basis * Vector3(0, 0, -1)).normalized()
+	
+	velocity.x = fastSpeed * direction.x
+	velocity.z = fastSpeed * direction.z
+
+func runAway():
+	var direction = (transform.basis * Vector3(0, 0, 1)).normalized()
 	
 	velocity.x = fastSpeed * direction.x
 	velocity.z = fastSpeed * direction.z

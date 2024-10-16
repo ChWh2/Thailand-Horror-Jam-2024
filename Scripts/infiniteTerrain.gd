@@ -12,6 +12,8 @@ var chunks = {}
 var chunksVisible = 0
 var lastVisibleChunks : Array[terrainChunk]
 
+var AmmoUsedChunks : Array[Vector2]
+
 func _ready():
 	chunksVisible= roundi(float(viewDist)/float(chunkSize))
 	#setWireframe()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7eptdfi8dxkx"]
+[gd_scene load_steps=9 format=3 uid="uid://c7eptdfi8dxkx"]
 
 [ext_resource type="PackedScene" uid="uid://chjq0e1hhhrvl" path="res://Scenes/Player.tscn" id="1_v5ayn"]
 [ext_resource type="Script" path="res://Scripts/infiniteTerrain.gd" id="2_i5h1t"]
 [ext_resource type="PackedScene" uid="uid://dt3c3ncrjbbmq" path="res://Scenes/Chunk.tscn" id="3_34761"]
 [ext_resource type="PackedScene" uid="uid://3oa0eg0c5ri7" path="res://Scenes/wendigo.tscn" id="4_nne12"]
+[ext_resource type="PackedScene" uid="uid://dxb1j2lqywpex" path="res://Scenes/ammo.tscn" id="5_1r857"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wxo6e"]
 
@@ -45,3 +46,6 @@ chunkMeshScene = ExtResource("3_34761")
 [node name="Wendigo" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_nne12")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 100, 1, 0)
 target = NodePath("../Player")
+
+[node name="Ammo" parent="." instance=ExtResource("5_1r857")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
