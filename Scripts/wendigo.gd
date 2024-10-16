@@ -9,6 +9,7 @@ extends CharacterBody3D
 @export var noticeDist : float
 @export var loseInterestDist : float
 @export var reachDist : float
+@export var outOfRangeDist : float
 
 @export var target : Player
 
@@ -16,12 +17,14 @@ extends CharacterBody3D
 
 @onready var animPlayer : AnimationPlayer = $AnimationPlayer
 @onready var cam : Camera3D = get_viewport().get_camera_3d()
+@onready var mesh : Node3D = $Mesh
 
-enum STATES{STALKING, DECIDE_GET_OUT_OF_VIEW_DIRECTION, GETTING_OUT_OF_VIEW, ATTACKING}
+enum STATES{STALKING, DECIDE_GET_OUT_OF_VIEW_DIRECTION, GETTING_OUT_OF_VIEW, ATTACKING, OUT_OF_RANGE}
 
 var state : STATES = STATES.STALKING
 var onScreen = false
 var exitScreenRight : bool = false
+
 
 func testToChangeState() -> STATES:
 	var distance = position.distance_to(target.position)
@@ -29,7 +32,9 @@ func testToChangeState() -> STATES:
 	$Label.text = str("Sanity: ", clamp(distance, 0, 100), "/100").pad_decimals(0)
 	
 	if state == STATES.STALKING:
-		if onScreen:
+		if(distance >= outOfRangeDist):
+			return STATES.OUT_OF_RANGE
+		elif onScreen:
 			if distance > noticeDist:
 				if distance < getOutOfViewDist:
 					$TimeOnScreen.start()
@@ -55,7 +60,10 @@ func testToChangeState() -> STATES:
 				return STATES.DECIDE_GET_OUT_OF_VIEW_DIRECTION
 			else:
 				return STATES.STALKING
-	
+				
+	elif state == STATES.OUT_OF_RANGE:
+		if(distance <= outOfRangeDist):
+			return STATES.STALKING
 	return state
 
 func stateMachine():
@@ -69,6 +77,8 @@ func stateMachine():
 		getOutOfView()
 	elif state == STATES.ATTACKING:
 		attacking()
+	elif state == STATES.OUT_OF_RANGE:
+		outOfRange()
 
 func _physics_process(_delta):
 	
@@ -81,6 +91,10 @@ func _physics_process(_delta):
 	stateMachine()
 	move_and_slide()
 	animMananger()
+	
+	if velocity.x != 0.0 or velocity.z != 0.0:
+		mesh.look_at(Vector3(velocity.x, 0.0, velocity.z) + mesh.global_position)
+	
 
 func stalking():
 
@@ -119,6 +133,12 @@ func attacking():
 		velocity.z = move_toward(velocity.z, 0, fastSpeed)
 		target.attacked()
 	
+
+func outOfRange():
+	var direction = (transform.basis * Vector3(0, 0, -1)).normalized()
+	
+	velocity.x = fastSpeed * direction.x
+	velocity.z = fastSpeed * direction.z
 
 func animMananger():
 	if velocity.x or velocity.z:

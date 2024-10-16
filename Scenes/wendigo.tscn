@@ -812,6 +812,83 @@ tracks/56/path = NodePath(".:mixamorig_RightToe_End")
 tracks/56/interp = 1
 tracks/56/loop_wrap = true
 tracks/56/keys = PackedFloat32Array(0, 1, 1.43582e-10, -2.6319e-17, -6.9389e-18, 1)
+tracks/57/type = "rotation_3d"
+tracks/57/imported = false
+tracks/57/enabled = true
+tracks/57/path = NodePath(".:mixamorig_HeadTop_End_end")
+tracks/57/interp = 1
+tracks/57/loop_wrap = true
+tracks/57/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/58/type = "rotation_3d"
+tracks/58/imported = false
+tracks/58/enabled = true
+tracks/58/path = NodePath(".:mixamorig_LeftHandThumb4_end")
+tracks/58/interp = 1
+tracks/58/loop_wrap = true
+tracks/58/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/59/type = "rotation_3d"
+tracks/59/imported = false
+tracks/59/enabled = true
+tracks/59/path = NodePath(".:mixamorig_LeftHandIndex4_end")
+tracks/59/interp = 1
+tracks/59/loop_wrap = true
+tracks/59/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/60/type = "rotation_3d"
+tracks/60/imported = false
+tracks/60/enabled = true
+tracks/60/path = NodePath(".:mixamorig_LeftHandMiddle4_end")
+tracks/60/interp = 1
+tracks/60/loop_wrap = true
+tracks/60/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/61/type = "rotation_3d"
+tracks/61/imported = false
+tracks/61/enabled = true
+tracks/61/path = NodePath(".:mixamorig_LeftHandRing4_end")
+tracks/61/interp = 1
+tracks/61/loop_wrap = true
+tracks/61/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/62/type = "rotation_3d"
+tracks/62/imported = false
+tracks/62/enabled = true
+tracks/62/path = NodePath(".:mixamorig_RightHandThumb4_end")
+tracks/62/interp = 1
+tracks/62/loop_wrap = true
+tracks/62/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/63/type = "rotation_3d"
+tracks/63/imported = false
+tracks/63/enabled = true
+tracks/63/path = NodePath(".:mixamorig_RightHandIndex4_end")
+tracks/63/interp = 1
+tracks/63/loop_wrap = true
+tracks/63/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/64/type = "rotation_3d"
+tracks/64/imported = false
+tracks/64/enabled = true
+tracks/64/path = NodePath(".:mixamorig_RightHandMiddle4_end")
+tracks/64/interp = 1
+tracks/64/loop_wrap = true
+tracks/64/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/65/type = "rotation_3d"
+tracks/65/imported = false
+tracks/65/enabled = true
+tracks/65/path = NodePath(".:mixamorig_RightHandRing4_end")
+tracks/65/interp = 1
+tracks/65/loop_wrap = true
+tracks/65/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/66/type = "rotation_3d"
+tracks/66/imported = false
+tracks/66/enabled = true
+tracks/66/path = NodePath(".:mixamorig_LeftToe_End_end")
+tracks/66/interp = 1
+tracks/66/loop_wrap = true
+tracks/66/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/67/type = "rotation_3d"
+tracks/67/imported = false
+tracks/67/enabled = true
+tracks/67/path = NodePath(".:mixamorig_RightToe_End_end")
+tracks/67/interp = 1
+tracks/67/loop_wrap = true
+tracks/67/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_2ayyh"]
 resource_name = "Running"
@@ -1428,6 +1505,7 @@ bind/56/bone = -1
 bind/56/pose = Transform3D(-0.995448, 0.0876976, -0.0372624, -0.0364987, 0.0103764, 0.999275, 0.0880204, 0.996093, -0.00712969, -0.185659, -0.109955, 0.0895067)
 
 [node name="Wendigo" type="CharacterBody3D"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_iqupi")
@@ -1437,11 +1515,12 @@ attackDist = 20.0
 getOutOfViewDist = 40.0
 noticeDist = 30.0
 loseInterestDist = 40.0
-reachDist = 3.0
+reachDist = 2.0
+outOfRangeDist = 60.0
 terrainNoise = SubResource("FastNoiseLite_ty38o")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Skeleton3D")
+root_node = NodePath("../Mesh/Skeleton3D")
 libraries = {
 "": SubResource("AnimationLibrary_500jr")
 }
@@ -1451,8 +1530,25 @@ autoplay = "Idle"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_d1710")
 
-[node name="Skeleton3D" type="Skeleton3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+[node name="Onscreen" type="VisibleOnScreenNotifier3D" parent="."]
+aabb = AABB(-0.5, 0, -0.5, 1, 2, 1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 134.0
+offset_bottom = 77.0
+text = "Sanity: /100"
+
+[node name="TimeOnScreen" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Mesh" type="Node3D" parent="."]
+
+[node name="Skeleton3D" type="Skeleton3D" parent="Mesh"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 bones/0/name = "mixamorig_Hips"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, -1.93582e-05, -4.00944e-06, 1.93582e-05, 1, 9.3272e-07, 4.00942e-06, -9.32797e-07, 1, -9.77556e-06, 1.11845, -0.0135251)
@@ -1520,9 +1616,9 @@ bones/9/name = "mixamorig_LeftArm"
 bones/9/parent = 8
 bones/9/rest = Transform3D(0.847206, 0.344322, 0.404578, 4.17232e-07, 0.761539, -0.648119, -0.531264, 0.549091, 0.64518, 2.40465e-08, 0.163362, 1.55392e-07)
 bones/9/enabled = true
-bones/9/position = Vector3(-2.20537e-08, 0.163362, 1.8239e-07)
+bones/9/position = Vector3(-1.74945e-08, 0.163362, 2.95026e-07)
 bones/9/rotation = Quaternion(0.561964, 0.261178, -0.0671844, 0.781964)
-bones/9/scale = Vector3(1, 1, 1)
+bones/9/scale = Vector3(0.999999, 0.999999, 0.999999)
 bones/10/name = "mixamorig_LeftForeArm"
 bones/10/parent = 9
 bones/10/rest = Transform3D(0.754048, -0.501255, -0.424447, 0.553596, 0.832785, -4.84288e-07, 0.353474, -0.234972, 0.905453, 3.97351e-08, 0.403012, -1.65805e-07)
@@ -1930,24 +2026,9 @@ bones/67/position = Vector3(0, 0.0487217, 0)
 bones/67/rotation = Quaternion(0, 0, 0, 1)
 bones/67/scale = Vector3(1, 1, 1)
 
-[node name="Wendigo" type="MeshInstance3D" parent="Skeleton3D"]
+[node name="Wendigo" type="MeshInstance3D" parent="Mesh/Skeleton3D"]
 mesh = SubResource("ArrayMesh_hat8o")
 skin = SubResource("Skin_je4od")
-
-[node name="Onscreen" type="VisibleOnScreenNotifier3D" parent="."]
-aabb = AABB(-0.5, 0, -0.5, 1, 2, 1)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1)
-
-[node name="Label" type="Label" parent="."]
-offset_right = 134.0
-offset_bottom = 77.0
-text = "Sanity: /100"
-
-[node name="TimeOnScreen" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
 
 [connection signal="screen_entered" from="Onscreen" to="." method="_on_onscreen_screen_entered"]
 [connection signal="screen_exited" from="Onscreen" to="." method="_on_onscreen_screen_exited"]

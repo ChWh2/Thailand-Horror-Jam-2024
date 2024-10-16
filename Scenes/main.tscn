@@ -43,5 +43,5 @@ player = NodePath("../Player")
 chunkMeshScene = ExtResource("3_34761")
 
 [node name="Wendigo" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_nne12")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 1, 0)
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 100, 1, 0)
 target = NodePath("../Player")
