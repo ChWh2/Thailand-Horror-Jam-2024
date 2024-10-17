@@ -1,7 +1,9 @@
-[gd_scene load_steps=14 format=4 uid="uid://3oa0eg0c5ri7"]
+[gd_scene load_steps=16 format=4 uid="uid://3oa0eg0c5ri7"]
 
 [ext_resource type="Script" path="res://Scripts/wendigo.gd" id="1_iqupi"]
 [ext_resource type="Texture2D" uid="uid://6hpf2o400soy" path="res://Assets/Images/Wendigo.png" id="2_n5a6y"]
+[ext_resource type="AudioStream" uid="uid://b2gt75nca381k" path="res://Assets/Audio/SFX/Attacked.ogg" id="3_frncr"]
+[ext_resource type="AudioStream" uid="uid://caortf8f2345b" path="res://Assets/Audio/SFX/Ghost_scream_3.wav" id="4_y2udk"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ty38o"]
 noise_type = 3
@@ -2058,6 +2060,13 @@ value = 10.0
 fill_mode = 3
 texture_progress = SubResource("GradientTexture2D_isjwr")
 
+[node name="Attack" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_frncr")
+
+[node name="Hurt" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_y2udk")
+
 [connection signal="screen_entered" from="Onscreen" to="." method="_on_onscreen_screen_entered"]
 [connection signal="screen_exited" from="Onscreen" to="." method="_on_onscreen_screen_exited"]
 [connection signal="timeout" from="TimeOnScreen" to="." method="_on_time_on_screen_timeout"]
+[connection signal="finished" from="Attack" to="." method="_on_attack_Anim_finished"]

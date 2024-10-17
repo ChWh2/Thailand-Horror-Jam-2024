@@ -7,9 +7,6 @@ var ammo : int = 1
 
 var justShotGun : bool = false
 
-func attacked():
-	get_tree().quit()
-
 func shoot():
 	if(ammo > 0):
 		if $Neck/GunRay.get_collider() is wendigo:

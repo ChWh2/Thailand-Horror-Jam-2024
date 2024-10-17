@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl5uh5mymkp5c"]
+
+[ext_resource type="AudioStream" uid="uid://qjrloxu7s7ch" path="res://Assets/Audio/Music/Occult.ogg" id="1_8apgx"]
+[ext_resource type="Script" path="res://Scripts/music_manager.gd" id="1_wkjxr"]
+
+[node name="MusicManager" type="Node3D"]
+script = ExtResource("1_wkjxr")
+
+[node name="occult" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_8apgx")

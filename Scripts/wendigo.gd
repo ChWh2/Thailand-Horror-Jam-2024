@@ -30,6 +30,9 @@ var onScreen = false
 var exitScreenRight : bool = false
 
 func hurt() -> void:
+	$Hurt.volume_db = Settings.MasterVolume + Settings.SoundEffectVolume
+	$Hurt.play()
+	
 	health -= 1
 	state = STATES.RUN_AWAY
 
@@ -153,7 +156,8 @@ func attacking():
 	else:
 		velocity.x = move_toward(velocity.x, 0, fastSpeed)
 		velocity.z = move_toward(velocity.z, 0, fastSpeed)
-		target.attacked()
+		$Attack.volume_db = Settings.MasterVolume + Settings.SoundEffectVolume
+		$Attack.play()
 	
 
 func outOfRange():
@@ -182,3 +186,6 @@ func _on_onscreen_screen_exited():
 
 func _on_time_on_screen_timeout():
 	state = STATES.ATTACKING
+
+func _on_attack_sound_finished():
+	get_tree().quit()
