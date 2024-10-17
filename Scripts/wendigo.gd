@@ -14,6 +14,7 @@ extends CharacterBody3D
 @export var runAwayDist : float
 
 @export var health = 10
+@export var headOffset : Vector3
 
 @export var target : Player
 
@@ -28,6 +29,8 @@ enum STATES{STALKING, DECIDE_GET_OUT_OF_VIEW_DIRECTION, GETTING_OUT_OF_VIEW, ATT
 var state : STATES = STATES.STALKING
 var onScreen = false
 var exitScreenRight : bool = false
+
+var frozen : bool = false
 
 func hurt() -> void:
 	$Hurt.volume_db = Settings.MasterVolume + Settings.SoundEffectVolume
@@ -100,7 +103,10 @@ func _ready():
 	$UI/Health.value = health
 
 func _physics_process(_delta):
-	
+	if !frozen:
+		physics_process()
+
+func physics_process():
 	if target.justShotGun == true:
 		state = STATES.RUN_AWAY
 		target.justShotGun = false
@@ -154,8 +160,15 @@ func attacking():
 		velocity.x = fastSpeed * direction.x
 		velocity.z = fastSpeed * direction.z
 	else:
-		velocity.x = move_toward(velocity.x, 0, fastSpeed)
-		velocity.z = move_toward(velocity.z, 0, fastSpeed)
+		velocity.x = 0
+		velocity.z = 0
+		
+		position = target.position + target.position.direction_to(position)
+		
+		frozen = true
+		target.dying = true
+		$UI/Health.hide()
+		$UI/RedOutline.show()
 		$Attack.volume_db = Settings.MasterVolume + Settings.SoundEffectVolume
 		$Attack.play()
 	
@@ -173,7 +186,9 @@ func runAway():
 	velocity.z = fastSpeed * direction.z
 
 func animMananger():
-	if velocity.x or velocity.z:
+	if frozen:
+		animPlayer.play("Attacking")
+	elif velocity.x or velocity.z:
 		animPlayer.play("Running")
 	else:
 		animPlayer.play("Idle")
@@ -187,5 +202,6 @@ func _on_onscreen_screen_exited():
 func _on_time_on_screen_timeout():
 	state = STATES.ATTACKING
 
+
 func _on_attack_sound_finished():
-	get_tree().quit()
+	SceneSwitcher.switchScene(SceneSwitcher.Scenes.END)

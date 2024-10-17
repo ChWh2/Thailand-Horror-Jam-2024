@@ -38,8 +38,9 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ym72d")
 
-[node name="Player" parent="." instance=ExtResource("1_v5ayn")]
+[node name="Player" parent="." node_paths=PackedStringArray("Wendigo") instance=ExtResource("1_v5ayn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+Wendigo = NodePath("../Wendigo")
 
 [node name="terrainGenerator" type="Node3D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("2_i5h1t")

@@ -5,5 +5,5 @@ extends Node3D
 func _ready():
 	occult.play()
 
-func _process(delta):
+func _process(_delta):
 	occult.volume_db = Settings.MasterVolume + Settings.MusicVolume

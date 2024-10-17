@@ -3,9 +3,15 @@ extends CharacterBody3D
 
 @export var speed = 5.0
 
+var dying = false
+
 var ammo : int = 1
 
 var justShotGun : bool = false
+
+@onready var camera = $Neck/Camera3D
+
+@export var Wendigo : wendigo
 
 func shoot():
 	if(ammo > 0):
@@ -18,6 +24,13 @@ func shoot():
 		#playSound
 
 func _physics_process(delta):
+	if !dying:
+		physics_process(delta)
+	else:
+		velocity = Vector3.ZERO
+		camera.stare(Vector3(Wendigo.position + Wendigo.headOffset))
+
+func physics_process(delta):
 	$UI/Ammo.text = str("Ammo: ", ammo)
 	
 	if Input.is_action_just_pressed("Shoot"):

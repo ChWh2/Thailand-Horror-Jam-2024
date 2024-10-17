@@ -34,8 +34,6 @@ func _process(_delta: float) -> void:
 		crates.remove_at(i)
 		oldCrate.queue_free()
 	
-	
-	print(crates.size())
 	if crates.size() < maxCrates:
 		for i in maxCrates - crates.size():
 			var newCrate = ammoCrate.instantiate()
