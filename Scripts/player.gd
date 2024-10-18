@@ -5,7 +5,7 @@ extends CharacterBody3D
 
 var dying = false
 
-var ammo : int = 1
+var ammo : int = 100
 
 var justShotGun : bool = false
 

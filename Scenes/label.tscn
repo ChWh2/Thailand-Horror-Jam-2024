@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3hadgr6e4bhe"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xjfms"]
+font_size = 8
+
+[node name="Label" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "text here "
+label_settings = SubResource("LabelSettings_xjfms")
+autowrap_mode = 2

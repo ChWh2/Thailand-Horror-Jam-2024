@@ -1,23 +1,23 @@
-[gd_scene load_steps=25 format=4 uid="uid://d0j8aekn71jew"]
+[gd_scene load_steps=22 format=4 uid="uid://blvb6jsawlkh4"]
 
-[ext_resource type="Shader" path="res://Shaders/PSXCullShader.gdshader" id="1_sdyuo"]
-[ext_resource type="Texture2D" uid="uid://6hpf2o400soy" path="res://Assets/Images/Wendigo.png" id="2_2slal"]
-[ext_resource type="FontFile" uid="uid://bkk5lol8lm7ft" path="res://Assets/Fonts/ShadowsIntoLight-Regular.ttf" id="3_7tce5"]
+[ext_resource type="Shader" path="res://Shaders/PSXCullShader.gdshader" id="1_o4ihs"]
+[ext_resource type="Texture2D" uid="uid://6hpf2o400soy" path="res://Assets/Images/Wendigo.png" id="2_i31qn"]
+[ext_resource type="FontFile" uid="uid://bkk5lol8lm7ft" path="res://Assets/Fonts/ShadowsIntoLight-Regular.ttf" id="3_5ixj1"]
 
-[sub_resource type="Gradient" id="Gradient_cdvf1"]
+[sub_resource type="Gradient" id="Gradient_1mbbq"]
 colors = PackedColorArray(0, 0, 0, 1, 1, 0.599933, 0.540393, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_tp5qc"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pji56"]
 noise_type = 0
 fractal_gain = 0.755
 domain_warp_enabled = true
 domain_warp_amplitude = 26.66
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r7xeq"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_slybt"]
 width = 640
 height = 480
-color_ramp = SubResource("Gradient_cdvf1")
-noise = SubResource("FastNoiseLite_tp5qc")
+color_ramp = SubResource("Gradient_1mbbq")
+noise = SubResource("FastNoiseLite_pji56")
 
 [sub_resource type="Animation" id="Animation_sw0d5"]
 resource_name = "Attacking"
@@ -1793,9 +1793,9 @@ _data = {
 "Running": SubResource("Animation_2ayyh")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cbk1y"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oxulk"]
 render_priority = 0
-shader = ExtResource("1_sdyuo")
+shader = ExtResource("1_o4ihs")
 shader_parameter/snapRes = 512.0
 shader_parameter/roughness = 1.0
 shader_parameter/specular = 0.5
@@ -1803,17 +1803,17 @@ shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/light_intensity = 0.1
 shader_parameter/transparent = false
-shader_parameter/albedoTex = ExtResource("2_2slal")
+shader_parameter/albedoTex = ExtResource("2_i31qn")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f2cpe"]
 resource_name = "Material.001"
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_2slal")
+albedo_texture = ExtResource("2_i31qn")
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 0.0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_6t0g5"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_alfnf"]
 resource_name = "Wendigomesh_001"
 _surfaces = [{
 "aabb": AABB(-0.799968, -0.0837558, -0.232387, 1.59994, 2.23892, 0.647731),
@@ -1832,7 +1832,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="Skin" id="Skin_ocx62"]
+[sub_resource type="Skin" id="Skin_vlab6"]
 resource_name = "Skin"
 bind_count = 57
 bind/0/name = &"mixamorig_Hips"
@@ -2007,14 +2007,14 @@ bind/56/name = &"mixamorig_RightToe_End"
 bind/56/bone = -1
 bind/56/pose = Transform3D(-0.995448, 0.0876976, -0.0372624, -0.0364987, 0.0103764, 0.999275, 0.0880204, 0.996093, -0.00712969, -0.185659, -0.109955, 0.0895067)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8h8r2"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_22o7x"]
 
-[sub_resource type="Sky" id="Sky_pvosl"]
-sky_material = SubResource("ProceduralSkyMaterial_8h8r2")
+[sub_resource type="Sky" id="Sky_03v0u"]
+sky_material = SubResource("ProceduralSkyMaterial_22o7x")
 
-[sub_resource type="Environment" id="Environment_pgyru"]
+[sub_resource type="Environment" id="Environment_k2arp"]
 background_mode = 2
-sky = SubResource("Sky_pvosl")
+sky = SubResource("Sky_03v0u")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.1
@@ -2025,75 +2025,29 @@ fog_density = 0.02
 volumetric_fog_density = 0.06
 volumetric_fog_ambient_inject = 0.1
 
-[sub_resource type="LabelSettings" id="LabelSettings_w6ncq"]
-font = ExtResource("3_7tce5")
+[sub_resource type="LabelSettings" id="LabelSettings_cvvko"]
+font = ExtResource("3_5ixj1")
 font_size = 64
 font_color = Color(0.803922, 0.803922, 0.705882, 1)
 outline_size = 5
 outline_color = Color(0.803922, 0.803922, 0.705882, 1)
 
-[sub_resource type="GDScript" id="GDScript_wm4nr"]
+[sub_resource type="GDScript" id="GDScript_vjhfp"]
 resource_name = "Play"
 script/source = "extends Button
 
 func _on_pressed():
-	SceneSwitcher.switchScene(SceneSwitcher.Scenes.MAIN)
+	SceneSwitcher.switchScene(SceneSwitcher.Scenes.TITLE)
 "
 
-[sub_resource type="GDScript" id="GDScript_e0xfh"]
-resource_name = "lic"
-script/source = "extends Button
-
-
-
-func _on_pressed():
-	$\"../VBoxContainer\".show()
-"
-
-[sub_resource type="GDScript" id="GDScript_0pf77"]
+[sub_resource type="GDScript" id="GDScript_s2arc"]
 script/source = "extends Button
 
 func _on_pressed():
 	get_tree().quit()
 "
 
-[sub_resource type="GDScript" id="GDScript_ij6ta"]
-resource_name = "Licenser"
-script/source = "extends VBoxContainer
-
-@onready var license = 'res://Licenses.txt'
-
-var label = preload(\"res://Scenes/label.tscn\")
-
-func _ready():
-	var text_content = get_text_file_content(license)
-	
-	var lines = text_content.split(\",\", false)
-	
-	for i in lines:
-		var l = label.instantiate()
-		l.text = i
-		add_child(l)
-
-func get_text_file_content(filePath):
-	var file = FileAccess.open(filePath, FileAccess.READ)
-	var content = file.get_as_text()
-	return content
-"
-
-[sub_resource type="GDScript" id="GDScript_vele1"]
-resource_name = "x"
-script/source = "extends Button
-
-
-
-
-
-func _on_pressed():
-	$\"../../..\".hide()
-"
-
-[node name="Title" type="Control"]
+[node name="Lose" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -2108,7 +2062,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("NoiseTexture2D_r7xeq")
+texture = SubResource("NoiseTexture2D_slybt")
 
 [node name="Friend" type="SubViewportContainer" parent="."]
 layout_mode = 1
@@ -2619,25 +2573,24 @@ bones/67/rotation = Quaternion(0, 0, 0, 1)
 bones/67/scale = Vector3(1, 1, 1)
 
 [node name="Wendigo" type="MeshInstance3D" parent="Friend/SubViewport/Node3D/Mesh/Skeleton3D"]
-material_override = SubResource("ShaderMaterial_cbk1y")
-mesh = SubResource("ArrayMesh_6t0g5")
-skin = SubResource("Skin_ocx62")
+material_override = SubResource("ShaderMaterial_oxulk")
+mesh = SubResource("ArrayMesh_alfnf")
+skin = SubResource("Skin_vlab6")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Friend/SubViewport"]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Friend/SubViewport"]
-environment = SubResource("Environment_pgyru")
+environment = SubResource("Environment_k2arp")
 
 [node name="Title" type="Label" parent="."]
-layout_mode = 1
 offset_left = 5.0
 offset_top = 118.0
 offset_right = 355.0
 offset_bottom = 222.0
-text = "Wendigo's Howl"
-label_settings = SubResource("LabelSettings_w6ncq")
+text = "You Died"
+label_settings = SubResource("LabelSettings_cvvko")
 horizontal_alignment = 1
 
 [node name="Play" type="Button" parent="."]
@@ -2653,10 +2606,10 @@ offset_right = -40.0
 offset_bottom = -193.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Play"
-script = SubResource("GDScript_wm4nr")
+text = "Main Menu"
+script = SubResource("GDScript_vjhfp")
 
-[node name="Licenses" type="Button" parent="."]
+[node name="Play2" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2669,66 +2622,9 @@ offset_right = -40.0
 offset_bottom = -138.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Credits
-"
-script = SubResource("GDScript_e0xfh")
-
-[node name="Quit" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -240.0
-offset_top = -133.0
-offset_right = -40.0
-offset_bottom = -83.0
-grow_horizontal = 2
-grow_vertical = 0
 text = "Quit
 "
-script = SubResource("GDScript_0pf77")
-
-[node name="VBoxContainer" type="Panel" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -295.0
-offset_top = -215.0
-offset_right = 295.0
-offset_bottom = 215.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = SubResource("GDScript_ij6ta")
-
-[node name="Control" type="Control" parent="VBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="VBoxContainer/VBoxContainer/Control"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -32.0
-offset_bottom = 32.0
-grow_horizontal = 0
-text = "X"
-script = SubResource("GDScript_vele1")
+script = SubResource("GDScript_s2arc")
 
 [connection signal="pressed" from="Play" to="Play" method="_on_pressed"]
-[connection signal="pressed" from="Licenses" to="Licenses" method="_on_pressed"]
-[connection signal="pressed" from="Quit" to="Quit" method="_on_pressed"]
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/Control/Button" to="VBoxContainer/VBoxContainer/Control/Button" method="_on_pressed"]
+[connection signal="pressed" from="Play2" to="Play2" method="_on_pressed"]
