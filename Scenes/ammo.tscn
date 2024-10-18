@@ -1,11 +1,20 @@
-[gd_scene load_steps=8 format=4 uid="uid://dxb1j2lqywpex"]
+[gd_scene load_steps=9 format=4 uid="uid://dxb1j2lqywpex"]
 
 [ext_resource type="Texture2D" uid="uid://bfpx0k3pdn85e" path="res://Assets/Images/Ammo_Box.png" id="1_dciu0"]
 [ext_resource type="Script" path="res://Scripts/ammoBox.gd" id="1_fe481"]
+[ext_resource type="Shader" path="res://Shaders/PSXCullShader.gdshader" id="2_k3iia"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dbn54"]
-cull_mode = 2
-albedo_texture = ExtResource("1_dciu0")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jjwkd"]
+render_priority = 0
+shader = ExtResource("2_k3iia")
+shader_parameter/snapRes = 32.0
+shader_parameter/roughness = 1.0
+shader_parameter/specular = 0.1
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/light_intensity = 0.3
+shader_parameter/transparent = false
+shader_parameter/albedoTex = ExtResource("1_dciu0")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0u7so"]
 resource_name = "Ammo_Box"
@@ -54,7 +63,7 @@ script = ExtResource("1_fe481")
 
 [node name="Ammo_Box_Open" type="MeshInstance3D" parent="."]
 transform = Transform3D(50, 0, 0, 0, -1.40178e-06, 32.069, 0, -32.069, -1.40178e-06, 0, 0.3, 0)
-material_override = SubResource("StandardMaterial3D_dbn54")
+material_override = SubResource("ShaderMaterial_jjwkd")
 mesh = SubResource("ArrayMesh_u83hs")
 skeleton = NodePath("")
 

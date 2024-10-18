@@ -1,5 +1,5 @@
 shader_type spatial; 
-render_mode skip_vertex_transform, diffuse_burley; 
+render_mode skip_vertex_transform, diffuse_burley, cull_disabled; 
 
 //Albedo texture 
 uniform sampler2D albedoTex : source_color; //Geometric resolution for vert sna[ 
