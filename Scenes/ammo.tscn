@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://dxb1j2lqywpex"]
+[gd_scene load_steps=10 format=4 uid="uid://dxb1j2lqywpex"]
 
 [ext_resource type="Texture2D" uid="uid://bfpx0k3pdn85e" path="res://Assets/Images/Ammo_Box.png" id="1_dciu0"]
 [ext_resource type="Script" path="res://Scripts/ammoBox.gd" id="1_fe481"]
 [ext_resource type="Shader" path="res://Shaders/PSXCullShader.gdshader" id="2_k3iia"]
+[ext_resource type="AudioStream" uid="uid://cq6mt44mx51oo" path="res://Assets/Audio/SFX/Box_searching.wav" id="4_6oeoc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jjwkd"]
 render_priority = 0
@@ -71,4 +72,8 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 shape = SubResource("BoxShape3D_2mpch")
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_6oeoc")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="AudioStreamPlayer3D" to="." method="_on_audio_stream_player_3d_finished"]
