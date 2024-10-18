@@ -10,6 +10,7 @@ var ammo : int = 1
 var justShotGun : bool = false
 
 @onready var camera = $Neck/Camera3D
+@onready var Anim = $AnimationPlayer
 
 @export var Wendigo : wendigo
 
@@ -20,7 +21,8 @@ func shoot():
 		
 		justShotGun = true
 		ammo -= 1
-		$UI/GunCamera/SubViewport/GunShotParticles.emitting = true
+		Anim.play("Shoot")
+		$UI/GunCamera/SubViewport/GunHolder/GunShotParticles.emitting = true
 		#playSound
 
 func _physics_process(delta):
@@ -31,6 +33,12 @@ func _physics_process(delta):
 		camera.stare(Vector3(Wendigo.position + Wendigo.headOffset))
 
 func physics_process(delta):
+	if(Anim.current_animation != "Shoot"):
+		if(velocity.x or velocity.z):
+			Anim.play("walk")
+		else:
+			Anim.stop()
+	
 	$UI/Ammo.text = str("Ammo: ", ammo)
 	
 	if Input.is_action_just_pressed("Shoot"):
