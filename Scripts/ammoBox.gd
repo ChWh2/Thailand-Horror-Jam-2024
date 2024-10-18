@@ -12,7 +12,6 @@ func _on_body_entered(body):
 
 		$Ammo_Box_Open.hide()
 		
-		audio.volume_db = Settings.MasterVolume + Settings.SoundEffectVolume
 		audio.play()
 		
 

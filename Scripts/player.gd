@@ -23,7 +23,6 @@ func shoot():
 		ammo -= 1
 		Anim.play("Shoot")
 		$UI/GunCamera/SubViewport/GunHolder/GunShotParticles.emitting = true
-		$GunShot.volume_db = Settings.MasterVolume + Settings.SoundEffectVolume
 		$GunShot.play()
 
 func _physics_process(delta):
@@ -37,7 +36,6 @@ func physics_process(delta):
 	if(Anim.current_animation != "Shoot"):
 		if(velocity.x or velocity.z):
 			if !$Footsteps.playing:
-				$Footsteps.volume_db = Settings.MasterVolume + Settings.SoundEffectVolume
 				$Footsteps.play()
 			Anim.play("walk")
 		else:

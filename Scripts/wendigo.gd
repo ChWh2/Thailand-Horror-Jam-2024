@@ -33,11 +33,13 @@ var exitScreenRight : bool = false
 var frozen : bool = false
 
 func hurt() -> void:
-	$Hurt.volume_db = Settings.MasterVolume + Settings.SoundEffectVolume
 	$Hurt.play()
 	
 	health -= 1
 	state = STATES.RUN_AWAY
+	
+	if health <= 0:
+		SceneSwitcher.switchScene(SceneSwitcher.Scenes.WIN)
 
 func testToChangeState() -> STATES:
 	var distance = position.distance_to(target.position)
@@ -169,7 +171,6 @@ func attacking():
 		target.dying = true
 		$UI/Health.hide()
 		$UI/RedOutline.show()
-		$Attack.volume_db = Settings.MasterVolume + Settings.SoundEffectVolume
 		$Attack.play()
 	
 
@@ -204,4 +205,4 @@ func _on_time_on_screen_timeout():
 
 
 func _on_attack_sound_finished():
-	SceneSwitcher.switchScene(SceneSwitcher.Scenes.END)
+	SceneSwitcher.switchScene(SceneSwitcher.Scenes.LOSE)
