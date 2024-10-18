@@ -1,20 +1,33 @@
-[gd_scene load_steps=8 format=4 uid="uid://ctyaju0l7if0c"]
+[gd_scene load_steps=10 format=4 uid="uid://ctyaju0l7if0c"]
 
-[ext_resource type="Texture2D" uid="uid://dltb378mlivn4" path="res://Assets/Raw/Trees/Wood_04.jpg" id="1_kf4ym"]
-[ext_resource type="Texture2D" uid="uid://dbongqss0osj3" path="res://Assets/Raw/Trees/Branch_05.png" id="2_urse1"]
+[ext_resource type="Shader" path="res://Shaders/PSX.gdshader" id="1_geag2"]
+[ext_resource type="Texture2D" uid="uid://gmwa3mbpkif8" path="res://Assets/Raw/Trees/Wood_09.jpg" id="2_adkoe"]
+[ext_resource type="Shader" path="res://Shaders/PSXCullShader.gdshader" id="3_1ctyc"]
+[ext_resource type="Texture2D" uid="uid://deae7i2f0cctr" path="res://Assets/Raw/Trees/Branch_13.png" id="4_jiifu"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i5cqc"]
-resource_name = "Wood_3"
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_kf4ym")
-emission_enabled = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_57crq"]
+render_priority = 0
+shader = ExtResource("1_geag2")
+shader_parameter/snapRes = 16.0
+shader_parameter/roughness = 1.0
+shader_parameter/specular = 0.1
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/light_intensity = 0.3
+shader_parameter/transparent = false
+shader_parameter/albedoTex = ExtResource("2_adkoe")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tjp6q"]
-resource_name = "Branch_5"
-transparency = 4
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_urse1")
-emission_enabled = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6dm2g"]
+render_priority = 0
+shader = ExtResource("3_1ctyc")
+shader_parameter/snapRes = 16.0
+shader_parameter/roughness = 1.0
+shader_parameter/specular = 0.1
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/light_intensity = 0.3
+shader_parameter/transparent = true
+shader_parameter/albedoTex = ExtResource("4_jiifu")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_es3i6"]
 _surfaces = [{
@@ -48,7 +61,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 204,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQAGAAZABoAGwAcABkAGAAbABkAHQAeAB8AIAAhACIAIgAjACAAJAAlACYAJgAnACQAKAApACoAKgArACgALAAtAC4ALgAvACwAMAAxADIAMwA0ADUANgA3ADgAOQA6ADsAPAA9AD4APgA/ADwAQABBAEIAQgBDAEAARABFAEYARwBIAEkASQBKAEcASwBMAE0ATgBPAFAAUQBSAFMAVABVAFYAVgBXAFQAWABZAFoAWgBbAFgAXABdAF4AXwBgAGEAYQBiAF8AYwBkAGUAZgBnAGgAaQBqAGsAbABtAG4AbgBvAGwAcABxAHIAcgBzAHAAdAB1AHYAdwB4AHkAeQB6AHcAewB8AH0AfgB/AIAAgQCCAIMAhACFAIYAhgCHAIQAiACJAIoAigCLAIgAjACNAI4AjwCQAJEAkQCSAI8AkwCUAJUAlgCXAJgAmQCaAJsA"),
-"material": SubResource("StandardMaterial3D_i5cqc"),
+"material": SubResource("ShaderMaterial_57crq"),
 "name": "Wood_3",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -60,7 +73,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 768,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQAGAAZABoAGgAbABgAHAAdAB4AHgAfABwAIAAhACIAIgAjACAAJAAlACYAJgAnACQAKAApACoAKgArACgALAAtAC4ALgAvACwAMAAxADIAMgAzADAANAA1ADYANgA3ADQAOAA5ADoAOgA7ADgAPAA9AD4APgA/ADwAQABBAEIAQgBDAEAARABFAEYARgBHAEQASABJAEoASgBLAEgATABNAE4ATgBPAEwAUABRAFIAUgBTAFAAVABVAFYAVgBXAFQAWABZAFoAWgBbAFgAXABdAF4AXgBfAFwAYABhAGIAYgBjAGAAZABlAGYAZgBnAGQAaABpAGoAagBrAGgAbABtAG4AbgBvAGwAcABxAHIAcgBzAHAAdAB1AHYAdgB3AHQAeAB5AHoAegB7AHgAfAB9AH4AfgB/AHwAgACBAIIAggCDAIAAhACFAIYAhgCHAIQAiACJAIoAigCLAIgAjACNAI4AjgCPAIwAkACRAJIAkgCTAJAAlACVAJYAlgCXAJQAmACZAJoAmgCbAJgAnACdAJ4AngCfAJwAoAChAKIAogCjAKAApAClAKYApgCnAKQAqACpAKoAqgCrAKgArACtAK4ArgCvAKwAsACxALIAsgCzALAAtAC1ALYAtgC3ALQAuAC5ALoAugC7ALgAvAC9AL4AvgC/ALwAwADBAMIAwgDDAMAAxADFAMYAxgDHAMQAyADJAMoAygDLAMgAzADNAM4AzgDPAMwA0ADRANIA0gDTANAA1ADVANYA1gDXANQA2ADZANoA2gDbANgA3ADdAN4A3gDfANwA4ADhAOIA4gDjAOAA5ADlAOYA5gDnAOQA6ADpAOoA6gDrAOgA7ADtAO4A7gDvAOwA8ADxAPIA8gDzAPAA9AD1APYA9gD3APQA+AD5APoA+gD7APgA/AD9AP4A/gD/APwAAAEBAQIBAgEDAQABBAEFAQYBBgEHAQQBCAEJAQoBCgELAQgBDAENAQ4BDgEPAQwBEAERARIBEgETARABFAEVARYBFgEXARQBGAEZARoBGgEbARgBHAEdAR4BHgEfARwBIAEhASIBIgEjASABJAElASYBJgEnASQBKAEpASoBKgErASgBLAEtAS4BLgEvASwBMAExATIBMgEzATABNAE1ATYBNgE3ATQBOAE5AToBOgE7ATgBPAE9AT4BPgE/ATwBQAFBAUIBQgFDAUABRAFFAUYBRgFHAUQBSAFJAUoBSgFLAUgBTAFNAU4BTgFPAUwBUAFRAVIBUgFTAVABVAFVAVYBVgFXAVQBWAFZAVoBWgFbAVgBXAFdAV4BXgFfAVwBYAFhAWIBYgFjAWABZAFlAWYBZgFnAWQBaAFpAWoBagFrAWgBbAFtAW4BbgFvAWwBcAFxAXIBcgFzAXABdAF1AXYBdgF3AXQBeAF5AXoBegF7AXgBfAF9AX4BfgF/AXwBgAGBAYIBggGDAYABhAGFAYYBhgGHAYQBiAGJAYoBigGLAYgBjAGNAY4BjgGPAYwBkAGRAZIBkgGTAZABlAGVAZYBlgGXAZQBmAGZAZoBmgGbAZgBnAGdAZ4BngGfAZwBoAGhAaIBogGjAaABpAGlAaYBpgGnAaQBqAGpAaoBqgGrAagBrAGtAa4BrgGvAawBsAGxAbIBsgGzAbABtAG1AbYBtgG3AbQBuAG5AboBugG7AbgBvAG9Ab4BvgG/AbwBwAHBAcIBwgHDAcABxAHFAcYBxgHHAcQByAHJAcoBygHLAcgBzAHNAc4BzgHPAcwB0AHRAdIB0gHTAdAB1AHVAdYB1gHXAdQB2AHZAdoB2gHbAdgB3AHdAd4B3gHfAdwB4AHhAeIB4gHjAeAB5AHlAeYB5gHnAeQB6AHpAeoB6gHrAegB7AHtAe4B7gHvAewB8AHxAfIB8gHzAfAB9AH1AfYB9gH3AfQB+AH5AfoB+gH7AfgB/AH9Af4B/gH/AfwB"),
-"material": SubResource("StandardMaterial3D_tjp6q"),
+"material": SubResource("ShaderMaterial_6dm2g"),
 "name": "Branch_5",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),

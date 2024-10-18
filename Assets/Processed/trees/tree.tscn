@@ -1,20 +1,33 @@
-[gd_scene load_steps=8 format=4 uid="uid://clhel3g04mimr"]
+[gd_scene load_steps=10 format=4 uid="uid://clhel3g04mimr"]
 
 [ext_resource type="Texture2D" uid="uid://gmwa3mbpkif8" path="res://Assets/Raw/Trees/Wood_09.jpg" id="1_sja5p"]
+[ext_resource type="Shader" path="res://Shaders/PSX.gdshader" id="1_yanqi"]
 [ext_resource type="Texture2D" uid="uid://deae7i2f0cctr" path="res://Assets/Raw/Trees/Branch_13.png" id="2_f08yo"]
+[ext_resource type="Shader" path="res://Shaders/PSXCullShader.gdshader" id="3_jbeh8"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vop2t"]
-resource_name = "Wood_5"
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_sja5p")
-emission_enabled = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_83rhm"]
+render_priority = 0
+shader = ExtResource("1_yanqi")
+shader_parameter/snapRes = 16.0
+shader_parameter/roughness = 1.0
+shader_parameter/specular = 0.1
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/light_intensity = 0.3
+shader_parameter/transparent = false
+shader_parameter/albedoTex = ExtResource("1_sja5p")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uymwv"]
-resource_name = "Branch_6"
-transparency = 4
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_f08yo")
-emission_enabled = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cfxxq"]
+render_priority = 0
+shader = ExtResource("3_jbeh8")
+shader_parameter/snapRes = 16.0
+shader_parameter/roughness = 1.0
+shader_parameter/specular = 0.1
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/light_intensity = 0.3
+shader_parameter/transparent = true
+shader_parameter/albedoTex = ExtResource("2_f08yo")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_e2ard"]
 _surfaces = [{
@@ -41,7 +54,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_e7dlt"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_wlc6a"]
 resource_name = "Cylinder_005"
 _surfaces = [{
 "aabb": AABB(-0.0254645, -0.0237943, -0.00693052, 0.0506071, 0.0465157, 0.158994),
@@ -50,7 +63,7 @@ _surfaces = [{
 "index_count": 228,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAUABQAEAAgACgALAAwADAANAAoADgAPAAsACwAKAA4AEAARABIAEgATABAAFAAQABMAEwAVABQAFgAXAAIAGAAXABkAGQAaABgAAwACABcAFwAYAAMAGwAcAB0AHQAeABsAFgAZABcAHwAQABQAHwARABAAFgALAA8AFgAMAAsAHwAgAAYAFgAhAAwAHwAGAAUAIgAjACQAJQAmACMAJwAlACMAKAAnACMAKQAoACMAKgApACMAKgArACkAIgAqACMAJAAsAC0ALgAvADAAMAAxAC4AMgAzADQANQA2ADMAMgA1ADMANwAzADgAOQA6ADMANwA5ADMAOwA8AD0APQA+ADsAJQAnAD8APwBAACUAQQBCAEMAQwBEAEEARQBGAB0AHQAcAEUARwAIAAQABABIAEcASQAAAAMAAwBKAEkARwA9AEsASwAIAEcATAAOAAoACgBNAEwATABOAE8ATwAOAEwAMAAVABMAEwBQADAAMAAvAFEAUQAVADAAUgBKAAMAAwAYAFIASAAEAAcABwBCAEgALwAuAEQAUwBUAFUAVgBXAFgAWQBaAFsA"),
 "lods": [0.0100942, PackedByteArray("FgAYAAAASgAAABgASQAAAEoASgAYAFIAFgAKAE8ATABPAAoATABOAE8ACgBNAEwAGwBFAB0ARQBGAB0AHQAeABsAHwATAFEAMABRABMAEwBQADAAMAAvAFEALgAvADAAMAAxAC4ALwAuAEQAQwBEAEEAQQBCAEMABwBCAEgABwBIAEcAHwAHAEsARwBLAAcARwA9AEsAOwA8AD0APQA+ADsAIgAjACQAJAAsAC0AIgAqACMAKgApACMAKgArACkAJwAlACMAJQAnAD8APwBAACUAXgAnAFwAYABfAF0AMgAzADQAMgA1ADMANQA2ADMANwAzADgANwA5ADMAOQA6ADMAUwBUAFUAVgBXAFgAWQBaAFsA")],
-"material": SubResource("StandardMaterial3D_vop2t"),
+"material": SubResource("ShaderMaterial_83rhm"),
 "name": "Wood_5",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -62,7 +75,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 588,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQAGAAZABoAGgAbABgAHAAdAB4AHgAfABwAIAAhACIAIgAjACAAJAAlACYAJgAnACQAKAApACoAKgArACgALAAtAC4ALgAvACwAMAAxADIAMgAzADAANAA1ADYANgA3ADQAOAA5ADoAOgA7ADgAPAA9AD4APgA/ADwAQABBAEIAQgBDAEAARABFAEYARgBHAEQASABJAEoASgBLAEgATABNAE4ATgBPAEwAUABRAFIAUgBTAFAAVABVAFYAVgBXAFQAWABZAFoAWgBbAFgAXABdAF4AXgBfAFwAYABhAGIAYgBjAGAAZABlAGYAZgBnAGQAaABpAGoAagBrAGgAbABtAG4AbgBvAGwAcABxAHIAcgBzAHAAdAB1AHYAdgB3AHQAeAB5AHoAegB7AHgAfAB9AH4AfgB/AHwAgACBAIIAggCDAIAAhACFAIYAhgCHAIQAiACJAIoAigCLAIgAjACNAI4AjgCPAIwAkACRAJIAkgCTAJAAlACVAJYAlgCXAJQAmACZAJoAmgCbAJgAnACdAJ4AngCfAJwAoAChAKIAogCjAKAApAClAKYApgCnAKQAqACpAKoAqgCrAKgArACtAK4ArgCvAKwAsACxALIAsgCzALAAtAC1ALYAtgC3ALQAuAC5ALoAugC7ALgAvAC9AL4AvgC/ALwAwADBAMIAwgDDAMAAxADFAMYAxgDHAMQAyADJAMoAygDLAMgAzADNAM4AzgDPAMwA0ADRANIA0gDTANAA1ADVANYA1gDXANQA2ADZANoA2gDbANgA3ADdAN4A3gDfANwA4ADhAOIA4gDjAOAA5ADlAOYA5gDnAOQA6ADpAOoA6gDrAOgA7ADtAO4A7gDvAOwA8ADxAPIA8gDzAPAA9AD1APYA9gD3APQA+AD5APoA+gD7APgA/AD9AP4A/gD/APwAAAEBAQIBAgEDAQABBAEFAQYBBgEHAQQBCAEJAQoBCgELAQgBDAENAQ4BDgEPAQwBEAERARIBEgETARABFAEVARYBFgEXARQBGAEZARoBGgEbARgBHAEdAR4BHgEfARwBIAEhASIBIgEjASABJAElASYBJgEnASQBKAEpASoBKgErASgBLAEtAS4BLgEvASwBMAExATIBMgEzATABNAE1ATYBNgE3ATQBOAE5AToBOgE7ATgBPAE9AT4BPgE/ATwBQAFBAUIBQgFDAUABRAFFAUYBRgFHAUQBSAFJAUoBSgFLAUgBTAFNAU4BTgFPAUwBUAFRAVIBUgFTAVABVAFVAVYBVgFXAVQBWAFZAVoBWgFbAVgBXAFdAV4BXgFfAVwBYAFhAWIBYgFjAWABZAFlAWYBZgFnAWQBaAFpAWoBagFrAWgBbAFtAW4BbgFvAWwBcAFxAXIBcgFzAXABdAF1AXYBdgF3AXQBeAF5AXoBegF7AXgBfAF9AX4BfgF/AXwBgAGBAYIBggGDAYABhAGFAYYBhgGHAYQB"),
-"material": SubResource("StandardMaterial3D_uymwv"),
+"material": SubResource("ShaderMaterial_cfxxq"),
 "name": "Branch_6",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -77,7 +90,7 @@ height = 5.0
 
 [node name="Tree" type="MeshInstance3D"]
 transform = Transform3D(200, 0, 0, 0, -8.74228e-06, 200, 0, -200, -8.74228e-06, 0, 0, 0)
-mesh = SubResource("ArrayMesh_e7dlt")
+mesh = SubResource("ArrayMesh_wlc6a")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
