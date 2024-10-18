@@ -4,7 +4,7 @@ var main : NodePath = "res://Scenes/main.tscn"
 
 var title : NodePath =  "res://Scenes/title.tscn"
 var lose : NodePath = "res://Scenes/lose.tscn"
-var win : NodePath = "res://Scenes/win.tscn"
+var win : NodePath = "res://Scenes/Win.tscn"
 
 enum Scenes{TITLE,MAIN,WIN,LOSE}
 

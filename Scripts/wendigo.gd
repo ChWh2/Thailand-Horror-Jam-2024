@@ -39,6 +39,7 @@ func hurt() -> void:
 	state = STATES.RUN_AWAY
 	
 	if health <= 0:
+		print(health)
 		SceneSwitcher.switchScene(SceneSwitcher.Scenes.WIN)
 
 func testToChangeState() -> STATES:

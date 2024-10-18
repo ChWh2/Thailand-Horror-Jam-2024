@@ -2007,8 +2007,8 @@ colors = PackedColorArray(1, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_isjwr"]
 gradient = SubResource("Gradient_ymdjl")
-width = 6
-height = 480
+width = 600
+height = 6
 
 [node name="Wendigo" type="CharacterBody3D"]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
@@ -2545,16 +2545,19 @@ mouse_filter = 2
 
 [node name="Health" type="TextureProgressBar" parent="UI"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -240.0
-offset_right = 6.0
-offset_bottom = 240.0
-grow_vertical = 2
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -20.0
+offset_right = 300.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
 max_value = 10.0
 value = 10.0
-fill_mode = 3
 texture_progress = SubResource("GradientTexture2D_isjwr")
 
 [node name="RedOutline" type="TextureRect" parent="UI"]

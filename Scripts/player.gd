@@ -16,14 +16,14 @@ var justShotGun : bool = false
 
 func shoot():
 	if(ammo > 0):
-		if $Neck/GunRay.get_collider() is wendigo:
-			$Neck/GunRay.get_collider().hurt()
-		
 		justShotGun = true
 		ammo -= 1
 		Anim.play("Shoot")
 		$UI/GunCamera/SubViewport/GunHolder/GunShotParticles.emitting = true
 		$GunShot.play()
+		
+		if $Neck/GunRay.get_collider() is wendigo:
+			$Neck/GunRay.get_collider().hurt()
 
 func _physics_process(delta):
 	if !dying:
@@ -44,9 +44,6 @@ func physics_process(delta):
 	
 	$UI/Ammo.text = str("Ammo: ", ammo)
 	
-	if Input.is_action_just_pressed("Shoot"):
-		shoot()
-	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
@@ -61,6 +58,9 @@ func physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, speed)
 	
 	move_and_slide()
+	
+	if Input.is_action_just_pressed("Shoot"):
+		shoot()
 
 
 func _on_footsteps_finished():
